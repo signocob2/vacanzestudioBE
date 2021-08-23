@@ -7,7 +7,6 @@ import univr.ingegneria.vacanzestudio.repository.AllergiaRepository;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AllergiaService {
@@ -29,7 +28,7 @@ public class AllergiaService {
     }
 
     public Allergia updateAllergia(Allergia allergia) {
-        allergiaRepository.save(allergia);
+        return allergiaRepository.save(allergia);
     }
 
     public void deleteAllergia(Long id) {
