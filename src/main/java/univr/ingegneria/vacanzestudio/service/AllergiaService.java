@@ -14,11 +14,6 @@ public class AllergiaService {
     @Resource
     private AllergiaRepository allergiaRepository;
 
-    public Allergia addAllergia(Allergia allergia) {
-        allergia.setId(0L);
-        return allergiaRepository.save(allergia);
-    }
-
     public List<Allergia> findAllAllergia() {
         return allergiaRepository.findAll();
     }
@@ -26,6 +21,15 @@ public class AllergiaService {
     public Allergia findAllergiaById(Long id) {
         return allergiaRepository.findAllergiaById(id)
                 .orElseThrow(() -> new AllergiaNotFoundException("Allergia by id" + id + " was not found"));
+    }
+
+    public Allergia addAllergia(Allergia allergia) {
+        allergia.setId(0L);
+        return allergiaRepository.save(allergia);
+    }
+
+    public Allergia updateAllergia(Allergia allergia) {
+        allergiaRepository.save(allergia);
     }
 
     public void deleteAllergia(Long id) {
