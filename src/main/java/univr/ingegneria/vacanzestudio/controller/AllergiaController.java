@@ -1,26 +1,20 @@
 package univr.ingegneria.vacanzestudio.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import univr.ingegneria.vacanzestudio.model.Allergia;
-import univr.ingegneria.vacanzestudio.repository.AllergiaRepository;
+import org.springframework.web.bind.annotation.RestController;
+import univr.ingegneria.vacanzestudio.service.AllergiaService;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Resource;
 
-@Controller
-@RequestMapping(value = "/test")
+@RestController
+@RequestMapping(value = "/allergia")
 class AllergiaController {
+    @Resource
+    AllergiaService allergiaService;
 
-    @Autowired
-    private AllergiaRepository repository;
-
-    @GetMapping
-    public void getTestData() {
-        System.out.println("Sono entrato nel metodo");
-        List<Allergia> allergiaList = new ArrayList<>(repository.findAll());
-        System.out.println("Allergie: " + allergiaList);
+    @GetMapping()
+    public void findAllAllergia() {
+        System.out.println("Allergie: " + allergiaService.findAllAllergia());
     }
 }
