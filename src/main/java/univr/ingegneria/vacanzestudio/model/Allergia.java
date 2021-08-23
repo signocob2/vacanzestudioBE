@@ -11,11 +11,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "allergia")
 public class Allergia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
+    @Column(name = "id_allergia", nullable = false, updatable = false)
     private Long id;
+
     private String nomeAllergene;
-    private String descrizionePrecauzioni;
+
+    private String descrizionePrecauzione;
 }
