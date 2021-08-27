@@ -12,7 +12,6 @@ import java.util.List;
 public class AllergiaService {
     @Resource
     private AllergiaRepository allergiaRepository;
-    //TEST
 
     public List<Allergia> findAllAllergia() {
         return allergiaRepository.findAll();
