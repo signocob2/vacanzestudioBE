@@ -29,4 +29,12 @@ public class Vacanza extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vacanza")
     private List<Gita> gitaList;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_vacanza")
+    private VacanzaCollege vacanzaCollege;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_vacanza")
+    private VacanzaFamiglia vacanzaFamiglia;
 }
