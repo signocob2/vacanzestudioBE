@@ -37,6 +37,8 @@ public class Studente extends BaseEntity {
 
     private String email;
 
+    private String password;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "studente")
     private List<Allergia> allergiaList;
 
