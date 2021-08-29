@@ -10,18 +10,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "allergia")
-public class Allergia extends BaseEntity {
+@Table(name = "hobby")
+public class Hobby extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_allergia", nullable = false, updatable = false)
+    @Column(name = "id_hobby", nullable = false, updatable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente")
     private Studente studente;
 
-    private String nomeAllergene;
-
-    private String descrizionePrecauzioniNecessarie;
+    private String nomeHobby;
 }
