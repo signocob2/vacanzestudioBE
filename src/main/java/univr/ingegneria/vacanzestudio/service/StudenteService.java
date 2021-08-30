@@ -18,6 +18,9 @@ public class StudenteService {
 
     public Studente addStudente(Studente studente) {
         studente.setId(0L);
+        studente.getAllergiaList().forEach(allergia -> {
+            allergia.setStudente(studente);
+        });
         studente.setUtente_inserimento(studente.getEmail());
         studente.setUtente_modifica(studente.getEmail());
         return studenteRepository.save(studente);

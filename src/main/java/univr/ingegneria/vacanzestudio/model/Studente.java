@@ -41,7 +41,7 @@ public class Studente extends BaseEntity {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "studente")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "studente")
     private List<Allergia> allergiaList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "studente")
