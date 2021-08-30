@@ -1,8 +1,18 @@
+# Intellij
+.idea/
+
+## Java
+# either the 3rd party diff or IDEA:
+*.java.orig
+
 # Compiled class file
 *.class
 
 # Log file
 *.log
+*.log.gz
+*.log-*.gz
+logs/
 
 # BlueJ files
 *.ctxt
@@ -21,3 +31,14 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+#Gradle
+.gradle
+*/.gradle
+**/gradle_build/
+
+#
+*.iml
+**/*.iml
+*.ipr
+*.iws
