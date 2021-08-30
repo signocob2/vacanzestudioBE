@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Studente extends BaseEntity {
 
     private String cognome;
 
+    @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDate dataDiNascita;
 
     private String comuneDiNascita;
