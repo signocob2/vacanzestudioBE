@@ -26,6 +26,21 @@ public class StudenteService {
             allergia.setUtente_inserimento(studente.getUtente_inserimento());
             allergia.setUtente_modifica(studente.getUtente_modifica());
         });
+
+        // Hobby
+        studente.getHobbyList().forEach(hobby -> {
+            hobby.setStudente(studente);
+            hobby.setUtente_inserimento(studente.getUtente_inserimento());
+            hobby.setUtente_modifica(studente.getUtente_modifica());
+        });
+
+        // Genitori
+        studente.getGenitoreList().forEach(genitore -> {
+            genitore.setStudente(studente);
+            genitore.setUtente_inserimento(studente.getUtente_inserimento());
+            genitore.setUtente_modifica(studente.getUtente_modifica());
+        });
+
         return studenteRepository.save(studente);
     }
 }
