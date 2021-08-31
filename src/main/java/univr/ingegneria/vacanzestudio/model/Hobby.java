@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,10 @@ public class Hobby extends BaseEntity {
     @Column(name = "id_hobby", nullable = false, updatable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente")
+    @JsonIgnore
     private Studente studente;
 
-    private String nomeHobby;
+    private String nome;
 }

@@ -22,9 +22,9 @@ public class College extends BaseEntity {
 
     private String indirizzo;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "college")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
     private List<AttivitaCollege> attivitaCollegeList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "college")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
     private List<VacanzaCollege> vacanzaCollegeList;
 }

@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +24,12 @@ public class VacanzaFamiglia extends BaseEntity {
 
     private String emailAmico;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
     private Vacanza vacanza;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_famiglia")
+    @JsonIgnore
     private Famiglia famiglia;
 }

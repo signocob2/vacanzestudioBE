@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,14 @@ public class VacanzaCollege extends BaseEntity {
 
     private String singolaCondivisa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
+    @JsonIgnore
     private Vacanza vacanza;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_college")
+    @JsonIgnore
     private College college;
 
     public boolean isSingola() {

@@ -44,9 +44,9 @@ public class Studente extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
     private List<Allergia> allergiaList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "studente")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
     private List<Hobby> hobbyList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "studente")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
     private List<Genitore> genitoreList;
 }

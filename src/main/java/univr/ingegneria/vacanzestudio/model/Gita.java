@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,9 @@ public class Gita extends BaseEntity {
     @Column(name = "id_gita", nullable = false, updatable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
+    @JsonIgnore
     private Vacanza vacanza;
 
     private String destinazione;
