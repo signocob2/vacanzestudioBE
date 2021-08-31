@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "attivita_college")
 public class AttivitaCollege extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_attivita_college", nullable = false, updatable = false)
     private Long id;
 

@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "studente")
 public class Studente extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_studente", nullable = false, updatable = false)
     private Long id;
 
@@ -41,7 +41,7 @@ public class Studente extends BaseEntity {
 
     private String password;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "studente")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
     private List<Allergia> allergiaList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "studente")

@@ -17,12 +17,15 @@ public class StudenteService {
     StudenteRepository studenteRepository;
 
     public Studente addStudente(Studente studente) {
-        studente.setId(0L);
-        studente.getAllergiaList().forEach(allergia -> {
-            allergia.setStudente(studente);
-        });
         studente.setUtente_inserimento(studente.getEmail());
         studente.setUtente_modifica(studente.getEmail());
+
+        // Allergie
+        studente.getAllergiaList().forEach(allergia -> {
+            allergia.setStudente(studente);
+            allergia.setUtente_inserimento(studente.getUtente_inserimento());
+            allergia.setUtente_modifica(studente.getUtente_modifica());
+        });
         return studenteRepository.save(studente);
     }
 }

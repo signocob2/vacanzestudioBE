@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Table(name = "gita")
 public class Gita extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_gita", nullable = false, updatable = false)
     private Long id;
 

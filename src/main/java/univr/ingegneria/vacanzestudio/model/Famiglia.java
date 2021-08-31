@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "famiglia")
 public class Famiglia extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_famiglia", nullable = false, updatable = false)
     private Long id;
 
