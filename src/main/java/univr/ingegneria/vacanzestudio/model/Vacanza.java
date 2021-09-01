@@ -32,9 +32,9 @@ public class Vacanza extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
-    private VacanzaCollege vacanzaCollege;
+    private PrenotazioneVacanzaCollege prenotazioneVacanzaCollege;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
-    private VacanzaFamiglia vacanzaFamiglia;
+    private PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia;
 }

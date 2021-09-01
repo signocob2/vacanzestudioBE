@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "vacanza_college")
-public class VacanzaCollege extends BaseEntity {
+@Table(name = "prenotazione_vacanza_college")
+public class PrenotazioneVacanzaCollege extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_vacanza_college", nullable = false, updatable = false)
+    @Column(name = "id_prenotazione_vacanza_college", nullable = false, updatable = false)
     private Long id;
 
     private String singolaCondivisa;

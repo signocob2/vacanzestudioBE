@@ -26,5 +26,5 @@ public class College extends BaseEntity {
     private List<AttivitaCollege> attivitaCollegeList;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-    private List<VacanzaCollege> vacanzaCollegeList;
+    private List<PrenotazioneVacanzaCollege> prenotazioneVacanzaCollegeList;
 }
