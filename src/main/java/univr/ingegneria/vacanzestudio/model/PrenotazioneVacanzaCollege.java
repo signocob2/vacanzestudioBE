@@ -29,9 +29,9 @@ public class PrenotazioneVacanzaCollege extends BaseEntity {
     private Vacanza vacanza;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_college")
+    @JoinColumn(name = "id_studente")
     @JsonIgnore
-    private College college;
+    private Studente studente;
 
     public boolean isSingola() {
         return StringUtils.equals(this.singolaCondivisa, "S");

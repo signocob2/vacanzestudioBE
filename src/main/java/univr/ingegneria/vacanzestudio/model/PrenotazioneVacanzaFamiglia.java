@@ -29,7 +29,7 @@ public class PrenotazioneVacanzaFamiglia extends BaseEntity {
     private Vacanza vacanza;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_famiglia")
+    @JoinColumn(name = "id_studente")
     @JsonIgnore
-    private Famiglia famiglia;
+    private Studente studente;
 }
