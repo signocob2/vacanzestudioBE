@@ -40,11 +40,10 @@ public class Vacanza extends BaseEntity {
     private PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_vacanza")
-    @JsonIgnore
+    @JoinColumn(name = "id_college")
     private College college;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_college")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_famiglia")
     private Famiglia famiglia;
 }

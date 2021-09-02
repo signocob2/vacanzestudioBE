@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +38,8 @@ public class Famiglia extends BaseEntity {
     private BigDecimal distanzaCentroCittaKm;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "famiglia")
-    private List<PrenotazioneVacanzaFamiglia> prenotazioneVacanzaFamigliaList;
+    @JsonIgnore
+    private List<Vacanza> vacanzaList;
 
     public boolean isPresentiAnimaliDomestici() {
         return StringUtils.equals(this.presenzaAnimaliDomestici, "S");

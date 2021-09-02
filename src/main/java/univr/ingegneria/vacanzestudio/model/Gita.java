@@ -26,7 +26,7 @@ public class Gita extends BaseEntity {
 
     private String destinazione;
 
-    private BigDecimal costo;
+    private BigDecimal costoEuro;
 
     private Integer numeroOre;
 
