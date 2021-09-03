@@ -1,6 +1,7 @@
 package univr.ingegneria.vacanzestudio.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,7 @@ public class Famiglia extends BaseEntity {
     private BigDecimal distanzaCentroCittaKm;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "famiglia")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Vacanza> vacanzaList;
 
     public boolean isPresentiAnimaliDomestici() {

@@ -25,7 +25,6 @@ public class College extends BaseEntity {
     private String indirizzo;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<AttivitaCollege> attivitaCollegeList;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")

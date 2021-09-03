@@ -26,7 +26,7 @@ public class PrenotazioneVacanzaCollege extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Vacanza vacanza;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

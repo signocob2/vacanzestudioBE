@@ -2,6 +2,7 @@ package univr.ingegneria.vacanzestudio.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,11 +43,9 @@ public class Vacanza extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_college")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private College college;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_famiglia")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Famiglia famiglia;
 }
