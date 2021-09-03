@@ -38,7 +38,6 @@ public class Famiglia extends BaseEntity {
     private BigDecimal distanzaCentroCittaKm;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "famiglia")
-    @JsonIgnore
     private List<Vacanza> vacanzaList;
 
     public boolean isPresentiAnimaliDomestici() {

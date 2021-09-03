@@ -17,6 +17,8 @@ public class StudenteService {
     StudenteRepository studenteRepository;
 
     public Studente addStudente(Studente studente) {
+        System.out.println("************");
+        System.out.println("StudenteService.addStudente");
         studente.setUtente_inserimento(studente.getEmail());
         studente.setUtente_modifica(studente.getEmail());
 
@@ -27,6 +29,8 @@ public class StudenteService {
             allergia.setUtente_modifica(studente.getUtente_modifica());
         });
 
+        System.out.println("StudenteService fine allergie");
+
         // Hobby
         studente.getHobbyList().forEach(hobby -> {
             hobby.setStudente(studente);
@@ -34,6 +38,7 @@ public class StudenteService {
             hobby.setUtente_modifica(studente.getUtente_modifica());
         });
 
+        System.out.println("StudenteService fine hobby");
         // Genitori
         studente.getGenitoreList().forEach(genitore -> {
             genitore.setStudente(studente);
@@ -41,6 +46,7 @@ public class StudenteService {
             genitore.setUtente_modifica(studente.getUtente_modifica());
         });
 
+        System.out.println("StudenteService fine genitori");
         return studenteRepository.save(studente);
     }
 }
