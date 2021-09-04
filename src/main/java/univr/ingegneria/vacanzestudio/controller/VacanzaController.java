@@ -3,6 +3,7 @@ package univr.ingegneria.vacanzestudio.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import univr.ingegneria.vacanzestudio.dto.DettaglioVacanzaDto;
 import univr.ingegneria.vacanzestudio.dto.VacanzaDto;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 import univr.ingegneria.vacanzestudio.service.VacanzaService;
@@ -25,23 +26,28 @@ class VacanzaController {
     @ResponseBody
     public List<VacanzaDto> getAllVacanza() {
         List<Vacanza> vacanzaList = vacanzaService.findAllVacanza();
-        return convertToDto(vacanzaList);
+        return convertToVacanzaDtoList(vacanzaList);
     }
 
     @GetMapping("/find/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public VacanzaDto getVacanzaById(@PathVariable("id") Long id) {
-        return convertToDto(vacanzaService.findVacanzaById(id));
+    public DettaglioVacanzaDto getVacanzaById(@PathVariable("id") Long id) {
+        return convertToDettaglioVacanzaDto(vacanzaService.findVacanzaById(id));
     }
 
-    private VacanzaDto convertToDto(Vacanza vacanza) {
+    // Converter
+    private DettaglioVacanzaDto convertToDettaglioVacanzaDto(Vacanza vacanza) {
+        return modelMapper.map(vacanza, DettaglioVacanzaDto.class);
+    }
+
+    private VacanzaDto convertToVacanzaDto(Vacanza vacanza) {
         return modelMapper.map(vacanza, VacanzaDto.class);
     }
 
-    private List<VacanzaDto> convertToDto(List<Vacanza> vacanzaList) {
+    private List<VacanzaDto> convertToVacanzaDtoList(List<Vacanza> vacanzaList) {
         return vacanzaList.stream()
-                .map(this::convertToDto)
+                .map(this::convertToVacanzaDto)
                 .collect(Collectors.toList());
     }
 }

@@ -1,16 +1,12 @@
 package univr.ingegneria.vacanzestudio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AllergiaDto extends BaseDto {
+public class AllergiaDto {
     private Long id;
-
-    @JsonIgnore
-    private StudenteDto studente;
 
     private String nomeAllergene;
 

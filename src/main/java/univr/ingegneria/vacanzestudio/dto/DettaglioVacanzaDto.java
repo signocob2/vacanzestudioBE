@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class VacanzaDto {
+public class DettaglioVacanzaDto {
     private Long id;
 
     private String cittaDiPermanenza;
@@ -20,4 +20,8 @@ public class VacanzaDto {
     private String linguaStranieraStudiata;
 
     private List<GitaDto> gitaList;
+
+    private CollegeDto college;
+
+    private FamigliaDto famiglia;
 }

@@ -1,15 +1,13 @@
 package univr.ingegneria.vacanzestudio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
 @Setter
-public class FamigliaDto extends BaseDto {
+public class FamigliaDto {
     private Long id;
 
     private String nomeCapoFamiglia;
@@ -27,7 +25,4 @@ public class FamigliaDto extends BaseDto {
     private Integer numeroBagni;
 
     private BigDecimal distanzaCentroCittaKm;
-
-    @JsonIgnore
-    private List<VacanzaDto> vacanzaList;
 }
