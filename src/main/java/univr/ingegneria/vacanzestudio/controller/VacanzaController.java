@@ -30,9 +30,6 @@ class VacanzaController {
     @ResponseBody
     public VacanzaDto getVacanzaById(@PathVariable("id") Long id) {
         return convertToDto(vacanzaService.findVacanzaById(id));
-
-//        Vacanza vacanza = vacanzaService.findVacanzaById(id);
-//        return new ResponseEntity<>(vacanza, HttpStatus.OK);
     }
 
     private VacanzaDto convertToDto(Vacanza vacanza) {
