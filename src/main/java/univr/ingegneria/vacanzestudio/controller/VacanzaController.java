@@ -1,11 +1,10 @@
 package univr.ingegneria.vacanzestudio.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import univr.ingegneria.vacanzestudio.dto.VacanzaDto;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 import univr.ingegneria.vacanzestudio.service.VacanzaService;
 
@@ -18,6 +17,9 @@ class VacanzaController {
     @Resource
     VacanzaService vacanzaService;
 
+    @Resource
+    ModelMapper modelMapper;
+
     @GetMapping("/all")
     public ResponseEntity<List<Vacanza>> getAllVacanza() {
         List<Vacanza> vacanzaList = vacanzaService.findAllVacanza();
@@ -25,8 +27,15 @@ class VacanzaController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Vacanza> getVacanzaById(@PathVariable("id") Long id) {
-        Vacanza vacanza = vacanzaService.findVacanzaById(id);
-        return new ResponseEntity<>(vacanza, HttpStatus.OK);
+    @ResponseBody
+    public VacanzaDto getVacanzaById(@PathVariable("id") Long id) {
+        return convertToDto(vacanzaService.findVacanzaById(id));
+
+//        Vacanza vacanza = vacanzaService.findVacanzaById(id);
+//        return new ResponseEntity<>(vacanza, HttpStatus.OK);
+    }
+
+    private VacanzaDto convertToDto(Vacanza vacanza) {
+        return modelMapper.map(vacanza, VacanzaDto.class);
     }
 }

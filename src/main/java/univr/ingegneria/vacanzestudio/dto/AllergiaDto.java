@@ -1,8 +1,9 @@
-package univr.ingegneria.vacanzestudio.model;
+package univr.ingegneria.vacanzestudio.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import univr.ingegneria.vacanzestudio.model.BaseEntity;
+import univr.ingegneria.vacanzestudio.model.Studente;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "allergia")
-public class Allergia extends BaseEntity {
+public class AllergiaDto extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_allergia", nullable = false, updatable = false)
@@ -18,7 +19,6 @@ public class Allergia extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Studente studente;
 
     private String nomeAllergene;

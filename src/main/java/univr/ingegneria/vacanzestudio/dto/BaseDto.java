@@ -1,4 +1,4 @@
-package univr.ingegneria.vacanzestudio.model;
+package univr.ingegneria.vacanzestudio.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+public class BaseDto implements Serializable {
     private LocalDateTime timestamp_inserimento = LocalDateTime.now();
 
     private String utente_inserimento;
