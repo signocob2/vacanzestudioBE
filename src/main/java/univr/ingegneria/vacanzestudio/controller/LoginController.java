@@ -10,12 +10,12 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/login")
 class LoginController {
     @Resource
-    LoginService loginService;
+    LoginService loginServico;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Boolean getAllAllergia(@RequestParam String email, @RequestParam String password) {
-        return loginService.isAuthenticatedByEmailAndPassword(email, password);
+        return loginServico.isAuthenticatedByEmailAndPassword(email, password);
     }
 }
