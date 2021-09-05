@@ -18,16 +18,32 @@ class StudenteController {
     @Resource
     ModelMapper modelMapper;
 
+    @GetMapping("/find/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public StudenteDto getStudenteById(@PathVariable("id") Long id) {
+        return convertToStudenteDto(studenteService.findStudenteById(id));
+    }
+
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public StudenteDto addStudente(@RequestBody StudenteDto studenteDto) {
         Studente studente = convertToEntity(studenteDto);
         Studente newStudente = studenteService.addStudente(studente);
-        return convertToDto(newStudente);
+        return convertToStudenteDto(newStudente);
     }
 
-    private StudenteDto convertToDto(Studente studente) {
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public StudenteDto updateStudente(@RequestBody StudenteDto studenteDto) {
+        Studente studente = convertToEntity(studenteDto);
+        Studente newStudente = studenteService.updateStudente(studente);
+        return convertToStudenteDto(newStudente);
+    }
+
+    private StudenteDto convertToStudenteDto(Studente studente) {
         return modelMapper.map(studente, StudenteDto.class);
     }
 

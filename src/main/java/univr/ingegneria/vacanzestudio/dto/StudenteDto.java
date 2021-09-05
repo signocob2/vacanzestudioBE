@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class StudenteDto extends BaseDto {
+public class StudenteDto {
     private Long id;
 
     private String nome;
