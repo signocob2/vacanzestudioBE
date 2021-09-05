@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import univr.ingegneria.vacanzestudio.dto.DettaglioVacanzaDto;
-import univr.ingegneria.vacanzestudio.dto.VacanzaDto;
+import univr.ingegneria.vacanzestudio.dto.RicercaVacanzaDto;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 import univr.ingegneria.vacanzestudio.service.VacanzaService;
 
@@ -24,9 +24,9 @@ class VacanzaController {
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<VacanzaDto> getAllVacanza() {
+    public List<RicercaVacanzaDto> getAllVacanza() {
         List<Vacanza> vacanzaList = vacanzaService.findAllVacanza();
-        return convertToVacanzaDtoList(vacanzaList);
+        return convertToRicercaVacanzaDtoList(vacanzaList);
     }
 
     @GetMapping("/find/{id}")
@@ -41,11 +41,11 @@ class VacanzaController {
         return modelMapper.map(vacanza, DettaglioVacanzaDto.class);
     }
 
-    private VacanzaDto convertToVacanzaDto(Vacanza vacanza) {
-        return modelMapper.map(vacanza, VacanzaDto.class);
+    private RicercaVacanzaDto convertToVacanzaDto(Vacanza vacanza) {
+        return modelMapper.map(vacanza, RicercaVacanzaDto.class);
     }
 
-    private List<VacanzaDto> convertToVacanzaDtoList(List<Vacanza> vacanzaList) {
+    private List<RicercaVacanzaDto> convertToRicercaVacanzaDtoList(List<Vacanza> vacanzaList) {
         return vacanzaList.stream()
                 .map(this::convertToVacanzaDto)
                 .collect(Collectors.toList());

@@ -10,6 +10,18 @@ INSERT INTO COLLEGE
 VALUES ('College veronese', 'Verona, Corso Porta Nuova, 15', 'automatico', 'automatico')
 ;
 
+INSERT INTO ATTIVITA_COLLEGE
+(id_college, nome_attivita, descrizione_attivita, utente_inserimento, utente_modifica)
+VALUES ((SELECT ID_COLLEGE FROM COLLEGE WHERE UTENTE_INSERIMENTO = 'automatico'),
+        'CamminataLunga', 'Andiamo a camminare tutti insieme tanti km', 'automatico', 'automatico')
+;
+
+INSERT INTO ATTIVITA_COLLEGE
+(id_college, nome_attivita, descrizione_attivita, utente_inserimento, utente_modifica)
+VALUES ((SELECT ID_COLLEGE FROM COLLEGE WHERE UTENTE_INSERIMENTO = 'automatico'),
+        'CorsaBreve', 'Andiamo a correre per pochi metri', 'automatico', 'automatico')
+;
+
 INSERT INTO VACANZA
 (id_college, id_famiglia, citta_di_permanenza, data_di_partenza, numero_di_settimane_durata, lingua_straniera_studiata,
  utente_inserimento, utente_modifica)
