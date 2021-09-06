@@ -100,3 +100,4 @@ VALUES ((SELECT ID_VACANZA FROM VACANZA WHERE UTENTE_INSERIMENTO = 'automatico2'
         'Erbedello', 543.99, 5, 'Messa domenicale e spiegazione storia Erbedello', 'automatico2', 'automatico2')
 ;
 ------------------------------------------------------------------------------------------------------------------------
+COMMIT;

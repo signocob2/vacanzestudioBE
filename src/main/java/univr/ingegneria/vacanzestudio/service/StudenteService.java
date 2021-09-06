@@ -19,8 +19,14 @@ public class StudenteService {
         return prepareAndSaveStudente(studente);
     }
 
-    public Studente updateStudente(Studente studente) {
-        return prepareAndSaveStudente(studente);
+    public Studente updateStudente(Studente newStudente) {
+        Studente oldStudente = studenteRepository.findStudenteById(newStudente.getId());
+        if (oldStudente == null) {
+            return prepareAndSaveStudente(newStudente);
+        }
+        newStudente.setId(oldStudente.getId());
+        studenteRepository.delete(oldStudente);
+        return prepareAndSaveStudente(newStudente);
     }
 
     private Studente prepareAndSaveStudente(Studente studente) {
