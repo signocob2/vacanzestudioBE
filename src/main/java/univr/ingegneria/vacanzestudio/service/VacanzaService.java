@@ -1,9 +1,7 @@
 package univr.ingegneria.vacanzestudio.service;
 
 import org.springframework.stereotype.Service;
-import univr.ingegneria.vacanzestudio.exception.AllergiaNotFoundException;
-import univr.ingegneria.vacanzestudio.exception.VacanzaNotFoundException;
-import univr.ingegneria.vacanzestudio.model.Allergia;
+import univr.ingegneria.vacanzestudio.exception.VacanzaException;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 import univr.ingegneria.vacanzestudio.repository.VacanzaRepository;
 
@@ -21,6 +19,6 @@ public class VacanzaService {
 
     public Vacanza findVacanzaById(Long id) {
         return vacanzaRepository.findVacanzaById(id)
-                .orElseThrow(() -> new VacanzaNotFoundException("Vacanza by id" + id + " was not found"));
+                .orElseThrow(() -> new VacanzaException("Vacanza con id" + id + " non trovata"));
     }
 }
