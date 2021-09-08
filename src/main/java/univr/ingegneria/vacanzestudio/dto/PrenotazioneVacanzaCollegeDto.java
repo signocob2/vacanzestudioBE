@@ -8,5 +8,9 @@ import lombok.Setter;
 public class PrenotazioneVacanzaCollegeDto {
     private Long id;
 
+    private Long idVacanza;
+
+    private Long idStudente;
+
     private String singolaCondivisa;
 }

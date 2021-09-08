@@ -2,7 +2,11 @@ package univr.ingegneria.vacanzestudio.service;
 
 import org.springframework.stereotype.Service;
 import univr.ingegneria.vacanzestudio.exception.VacanzaException;
+import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
+import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
+import univr.ingegneria.vacanzestudio.repository.PrenotazioneVacanzaCollegeRepository;
+import univr.ingegneria.vacanzestudio.repository.PrenotazioneVacanzaFamigliaRepository;
 import univr.ingegneria.vacanzestudio.repository.VacanzaRepository;
 
 import javax.annotation.Resource;
@@ -13,6 +17,12 @@ public class VacanzaService {
     @Resource
     private VacanzaRepository vacanzaRepository;
 
+    @Resource
+    private PrenotazioneVacanzaCollegeRepository prenotazioneVacanzaCollegeRepository;
+
+    @Resource
+    private PrenotazioneVacanzaFamigliaRepository prenotazioneVacanzaFamigliaRepository;
+
     public List<Vacanza> findAllVacanza() {
         return vacanzaRepository.findAll();
     }
@@ -20,5 +30,17 @@ public class VacanzaService {
     public Vacanza findVacanzaById(Long id) {
         return vacanzaRepository.findVacanzaById(id)
                 .orElseThrow(() -> new VacanzaException("Vacanza con id" + id + " non trovata"));
+    }
+
+    public PrenotazioneVacanzaCollege addVacanzaCollege(PrenotazioneVacanzaCollege prenotazioneVacanzaCollege) {
+        return prenotazioneVacanzaCollegeRepository.save(prenotazioneVacanzaCollege);
+    }
+
+    public List<PrenotazioneVacanzaCollege> findPrenotazioneVacanzaCollegeByIdStudente(Long id) {
+        return prenotazioneVacanzaCollegeRepository.findPrenotazioneVacanzaCollegeByStudenteId(id);
+    }
+
+    public List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByIdStudente(Long id) {
+        return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByStudenteId(id);
     }
 }
