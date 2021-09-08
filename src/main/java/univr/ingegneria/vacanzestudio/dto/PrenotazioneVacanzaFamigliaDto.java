@@ -8,9 +8,11 @@ import lombok.Setter;
 public class PrenotazioneVacanzaFamigliaDto {
     private Long id;
 
-    private String nomeAmico;
+    private Long idVacanza;
 
-    private String cognomeAmico;
+    private Long idStudente;
+
+    private String nomeAmico;
 
     private String emailAmico;
 }

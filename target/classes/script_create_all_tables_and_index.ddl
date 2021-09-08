@@ -193,7 +193,6 @@ CREATE TABLE PRENOTAZIONE_VACANZA_FAMIGLIA
     id_vacanza                       NUMBER                              NOT NULL,
     id_studente                      NUMBER                              NOT NULL,
     nome_amico                       VARCHAR2(30)                        NOT NULL,
-    cognome_amico                    VARCHAR2(30)                        NOT NULL,
     email_amico                      VARCHAR2(50)                        NOT NULL,
     timestamp_inserimento            TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     utente_inserimento               VARCHAR2(50),

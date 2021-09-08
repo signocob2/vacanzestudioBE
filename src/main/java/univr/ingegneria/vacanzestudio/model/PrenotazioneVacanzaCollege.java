@@ -2,7 +2,6 @@ package univr.ingegneria.vacanzestudio.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 
@@ -25,12 +24,4 @@ public class PrenotazioneVacanzaCollege extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente")
     private Studente studente;
-
-    public boolean isSingola() {
-        return StringUtils.equals(this.singolaCondivisa, "S");
-    }
-
-    public boolean isCondivisa() {
-        return !this.isSingola();
-    }
 }

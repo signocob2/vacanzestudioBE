@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import univr.ingegneria.vacanzestudio.dto.DettaglioVacanzaDto;
 import univr.ingegneria.vacanzestudio.dto.PrenotazioneVacanzaCollegeDto;
+import univr.ingegneria.vacanzestudio.dto.PrenotazioneVacanzaFamigliaDto;
 import univr.ingegneria.vacanzestudio.dto.RicercaVacanzaDto;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
+import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 import univr.ingegneria.vacanzestudio.service.VacanzaService;
 
@@ -65,6 +67,15 @@ class VacanzaController {
         return convertToPrenotazioneVacanzaCollegeDto(prenotazioneVacanzaCollege);
     }
 
+    @PostMapping("/prenotazione/addVacanzaFamiglia")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public PrenotazioneVacanzaFamigliaDto addVacanzaFamiglia(@RequestBody PrenotazioneVacanzaFamigliaDto prenotazioneVacanzaFamigliaDto) {
+        PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia = convertToPrenotazioneVacanzaFamigliaEntity(prenotazioneVacanzaFamigliaDto);
+        prenotazioneVacanzaFamiglia = vacanzaService.addVacanzaFamiglia(prenotazioneVacanzaFamiglia);
+        return convertToPrenotazioneVacanzaFamigliaDto(prenotazioneVacanzaFamiglia);
+    }
+
     // Converter to dto
     private DettaglioVacanzaDto convertToDettaglioVacanzaDto(Vacanza vacanza) {
         return modelMapper.map(vacanza, DettaglioVacanzaDto.class);
@@ -84,8 +95,16 @@ class VacanzaController {
         return modelMapper.map(prenotazioneVacanzaCollege, PrenotazioneVacanzaCollegeDto.class);
     }
 
+    private PrenotazioneVacanzaFamigliaDto convertToPrenotazioneVacanzaFamigliaDto(PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia) {
+        return modelMapper.map(prenotazioneVacanzaFamiglia, PrenotazioneVacanzaFamigliaDto.class);
+    }
+
     // Converter to entity
     private PrenotazioneVacanzaCollege convertToPrenotazioneVacanzaCollegeEntity(PrenotazioneVacanzaCollegeDto prenotazioneVacanzaCollegeDto) {
         return modelMapper.map(prenotazioneVacanzaCollegeDto, PrenotazioneVacanzaCollege.class);
+    }
+
+    private PrenotazioneVacanzaFamiglia convertToPrenotazioneVacanzaFamigliaEntity(PrenotazioneVacanzaFamigliaDto prenotazioneVacanzaFamigliaDto) {
+        return modelMapper.map(prenotazioneVacanzaFamigliaDto, PrenotazioneVacanzaFamiglia.class);
     }
 }

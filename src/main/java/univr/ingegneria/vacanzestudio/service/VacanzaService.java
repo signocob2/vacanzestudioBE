@@ -36,6 +36,10 @@ public class VacanzaService {
         return prenotazioneVacanzaCollegeRepository.save(prenotazioneVacanzaCollege);
     }
 
+    public PrenotazioneVacanzaFamiglia addVacanzaFamiglia(PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia) {
+        return prenotazioneVacanzaFamigliaRepository.save(prenotazioneVacanzaFamiglia);
+    }
+
     public List<PrenotazioneVacanzaCollege> findPrenotazioneVacanzaCollegeByIdStudente(Long id) {
         return prenotazioneVacanzaCollegeRepository.findPrenotazioneVacanzaCollegeByStudenteId(id);
     }

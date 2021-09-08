@@ -1,6 +1,5 @@
 package univr.ingegneria.vacanzestudio.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,17 +17,13 @@ public class PrenotazioneVacanzaFamiglia extends BaseEntity {
 
     private String nomeAmico;
 
-    private String cognomeAmico;
-
     private String emailAmico;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Vacanza vacanza;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Studente studente;
 }
