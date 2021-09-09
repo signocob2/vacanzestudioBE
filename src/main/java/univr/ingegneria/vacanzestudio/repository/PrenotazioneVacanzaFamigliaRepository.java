@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PrenotazioneVacanzaFamigliaRepository extends JpaRepository<PrenotazioneVacanzaFamiglia, Long> {
 
-    List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByStudenteId(Long id);
+    List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByUtenteId(Long id);
 }

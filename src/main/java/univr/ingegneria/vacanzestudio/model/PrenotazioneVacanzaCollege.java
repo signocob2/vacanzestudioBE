@@ -22,6 +22,6 @@ public class PrenotazioneVacanzaCollege extends BaseEntity {
     private Vacanza vacanza;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_studente")
-    private Studente studente;
+    @JoinColumn(name = "id_utente")
+    private Utente utente;
 }

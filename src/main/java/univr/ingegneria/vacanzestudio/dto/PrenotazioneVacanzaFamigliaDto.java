@@ -10,7 +10,7 @@ public class PrenotazioneVacanzaFamigliaDto {
 
     private Long idVacanza;
 
-    private Long idStudente;
+    private Long idUtente;
 
     private String nomeAmico;
 

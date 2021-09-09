@@ -40,11 +40,11 @@ public class VacanzaService {
         return prenotazioneVacanzaFamigliaRepository.save(prenotazioneVacanzaFamiglia);
     }
 
-    public List<PrenotazioneVacanzaCollege> findPrenotazioneVacanzaCollegeByIdStudente(Long id) {
-        return prenotazioneVacanzaCollegeRepository.findPrenotazioneVacanzaCollegeByStudenteId(id);
+    public List<PrenotazioneVacanzaCollege> findPrenotazioneVacanzaCollegeByIdUtente(Long id) {
+        return prenotazioneVacanzaCollegeRepository.findPrenotazioneVacanzaCollegeByUtenteId(id);
     }
 
-    public List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByIdStudente(Long id) {
-        return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByStudenteId(id);
+    public List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByIdUtente(Long id) {
+        return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByUtenteId(id);
     }
 }

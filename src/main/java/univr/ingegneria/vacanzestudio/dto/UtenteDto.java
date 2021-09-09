@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class StudenteDto {
+public class UtenteDto {
     private Long id;
 
     private String nome;
@@ -32,6 +32,8 @@ public class StudenteDto {
     private String email;
 
     private String password;
+
+    private String isAdmin;
 
     private List<AllergiaDto> allergiaList;
 

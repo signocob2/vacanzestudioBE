@@ -10,7 +10,7 @@ public class PrenotazioneVacanzaCollegeDto {
 
     private Long idVacanza;
 
-    private Long idStudente;
+    private Long idUtente;
 
     private String singolaCondivisa;
 }

@@ -41,16 +41,16 @@ class VacanzaController {
         return convertToDettaglioVacanzaDto(vacanzaService.findVacanzaById(id));
     }
 
-    @GetMapping("/listaIdVacanzeGiaPrenotate/{idStudente}")
+    @GetMapping("/listaIdVacanzeGiaPrenotate/{idUtente}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<Long> getListaIdVacanzeGiaPrenotate(@PathVariable("idStudente") Long idStudente) {
-        List<Long> idVacanzaCollegeList = vacanzaService.findPrenotazioneVacanzaCollegeByIdStudente(idStudente)
+    public List<Long> getListaIdVacanzeGiaPrenotate(@PathVariable("idUtente") Long idUtente) {
+        List<Long> idVacanzaCollegeList = vacanzaService.findPrenotazioneVacanzaCollegeByIdUtente(idUtente)
                 .stream()
                 .map(p -> p.getVacanza().getId())
                 .collect(Collectors.toList());
 
-        List<Long> idVacanzaFamigliaList = vacanzaService.findPrenotazioneVacanzaFamigliaByIdStudente(idStudente)
+        List<Long> idVacanzaFamigliaList = vacanzaService.findPrenotazioneVacanzaFamigliaByIdUtente(idUtente)
                 .stream()
                 .map(p -> p.getVacanza().getId())
                 .collect(Collectors.toList());

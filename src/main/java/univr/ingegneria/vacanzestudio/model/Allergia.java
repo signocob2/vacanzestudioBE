@@ -17,9 +17,9 @@ public class Allergia extends BaseEntity {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_studente")
+    @JoinColumn(name = "id_utente")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Studente studente;
+    private Utente utente;
 
     private String nomeAllergene;
 

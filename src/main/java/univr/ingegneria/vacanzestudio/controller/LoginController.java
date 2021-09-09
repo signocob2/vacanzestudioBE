@@ -3,8 +3,8 @@ package univr.ingegneria.vacanzestudio.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import univr.ingegneria.vacanzestudio.dto.StudenteDto;
-import univr.ingegneria.vacanzestudio.model.Studente;
+import univr.ingegneria.vacanzestudio.dto.UtenteDto;
+import univr.ingegneria.vacanzestudio.model.Utente;
 import univr.ingegneria.vacanzestudio.service.LoginService;
 
 import javax.annotation.Resource;
@@ -22,16 +22,16 @@ class LoginController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public StudenteDto isAuthenticatedByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
-        Studente studente = loginService.isAuthenticatedByEmailAndPassword(email, password);
-        if (Objects.nonNull(studente)) {
-            return convertToStudenteDto(studente);
+    public UtenteDto isAuthenticatedByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
+        Utente utente = loginService.isAuthenticatedByEmailAndPassword(email, password);
+        if (Objects.nonNull(utente)) {
+            return convertToUtenteDto(utente);
         } else {
             return null;
         }
     }
 
-    private StudenteDto convertToStudenteDto(Studente studente) {
-        return modelMapper.map(studente, StudenteDto.class);
+    private UtenteDto convertToUtenteDto(Utente utente) {
+        return modelMapper.map(utente, UtenteDto.class);
     }
 }
