@@ -32,7 +32,15 @@ public class UtenteService {
                 throw new UtenteException("Modifica non effettuata - Utente con email " + s.getEmail() + " già presente");
             });
         }
+
         newUtente.setId(oldUtente.getId());
+
+        newUtente.setPrenotazioneVacanzaCollegeList(oldUtente.getPrenotazioneVacanzaCollegeList());
+        newUtente.getPrenotazioneVacanzaCollegeList().forEach(p -> p.setUtente(newUtente));
+
+        newUtente.setPrenotazioneVacanzaFamigliaList(oldUtente.getPrenotazioneVacanzaFamigliaList());
+        newUtente.getPrenotazioneVacanzaFamigliaList().forEach(p -> p.setUtente(newUtente));
+
         utenteRepository.delete(oldUtente);
         return prepareAndSaveUtente(newUtente);
     }
