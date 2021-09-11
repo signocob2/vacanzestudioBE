@@ -2,8 +2,10 @@ package univr.ingegneria.vacanzestudio.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import univr.ingegneria.vacanzestudio.dto.UtenteDto;
+import univr.ingegneria.vacanzestudio.exception.UtenteException;
 import univr.ingegneria.vacanzestudio.model.Utente;
 import univr.ingegneria.vacanzestudio.service.UtenteService;
 
@@ -19,10 +21,17 @@ class UtenteController {
     ModelMapper modelMapper;
 
     @GetMapping("/find/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public UtenteDto getUtenteById(@PathVariable("id") Long id) {
-        return convertToUtenteDto(utenteService.findUtenteById(id));
+    public ResponseEntity<?> getUtenteById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(convertToUtenteDto(utenteService.findUtenteById(id)));
+        } catch (UtenteException e) {
+            e.printStackTrace();
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/add")

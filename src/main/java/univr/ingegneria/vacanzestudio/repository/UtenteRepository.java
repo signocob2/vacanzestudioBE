@@ -6,7 +6,7 @@ import univr.ingegneria.vacanzestudio.model.Utente;
 import java.util.Optional;
 
 public interface UtenteRepository extends JpaRepository<Utente, Long> {
-    Utente findUtenteById(Long id);
+    Optional<Utente> findUtenteById(Long id);
 
     Optional<Utente> findUtenteByEmail(String email);
 

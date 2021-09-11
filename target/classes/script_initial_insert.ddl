@@ -101,3 +101,13 @@ VALUES ((SELECT ID_VACANZA FROM VACANZA WHERE UTENTE_INSERIMENTO = 'automatico2'
 ;
 ------------------------------------------------------------------------------------------------------------------------
 COMMIT;
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+--UTENTI
+INSERT INTO UTENTE
+(NOME, COGNOME, DATA_DI_NASCITA, COMUNE_DI_NASCITA, PROVINCIA_DI_NASCITA, CODICE_FISCALE, INDIRIZZO,
+ RECAPITO_TELEFONICO, EMAIL, PASSWORD, IS_ADMIN, UTENTE_INSERIMENTO, UTENTE_MODIFICA)
+VALUES ('Mario', 'Rossi', TO_DATE('06/08/1980', 'dd/MM/yyyy'), 'Verona', 'Verona', 'MARRSS80T24E349R',
+        'Via Giuseppe Garibaldi, 3', '3401122333', 'rossimario80@gmail.com', 'admin', 'S', 'automatico', 'automatico')
+;
+COMMIT;

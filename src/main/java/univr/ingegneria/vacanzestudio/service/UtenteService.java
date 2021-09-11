@@ -14,7 +14,8 @@ public class UtenteService {
     UtenteRepository utenteRepository;
 
     public Utente findUtenteById(Long idUtente) {
-        return utenteRepository.findUtenteById(idUtente);
+        return utenteRepository.findUtenteById(idUtente)
+                .orElseThrow(() -> new UtenteException("Modifica non ammessa - Utente con id " + idUtente + " non trovato"));
     }
 
     public Utente addUtente(Utente utente) {
