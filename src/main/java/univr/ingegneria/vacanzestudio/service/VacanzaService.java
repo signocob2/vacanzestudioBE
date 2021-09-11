@@ -5,17 +5,22 @@ import univr.ingegneria.vacanzestudio.exception.VacanzaException;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
-import univr.ingegneria.vacanzestudio.repository.PrenotazioneVacanzaCollegeRepository;
-import univr.ingegneria.vacanzestudio.repository.PrenotazioneVacanzaFamigliaRepository;
-import univr.ingegneria.vacanzestudio.repository.VacanzaRepository;
+import univr.ingegneria.vacanzestudio.repository.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class VacanzaService {
     @Resource
     private VacanzaRepository vacanzaRepository;
+
+    @Resource
+    private FamigliaRepository famigliaRepository;
+
+    @Resource
+    private CollegeRepository collegeRepository;
 
     @Resource
     private PrenotazioneVacanzaCollegeRepository prenotazioneVacanzaCollegeRepository;
@@ -54,8 +59,20 @@ public class VacanzaService {
 
 
     private Vacanza prepareAndSaveVacanza(Vacanza vacanza) {
-        vacanza.getFamiglia().setId(0L);
-        vacanza.getCollege().setId(0L);
+        if (Objects.isNull(vacanza.getFamiglia().getId())) {
+            vacanza.getFamiglia().setId(0L);
+            vacanza.setFamiglia(famigliaRepository.save(vacanza.getFamiglia()));
+        }
+
+        if (Objects.isNull(vacanza.getCollege().getId())) {
+            vacanza.getCollege().setId(0L);
+            vacanza.getCollege().getAttivitaCollegeList().forEach(attivitaCollege -> {
+                attivitaCollege.setCollege(vacanza.getCollege());
+                attivitaCollege.setUtente_inserimento(vacanza.getUtente_inserimento());
+                attivitaCollege.setUtente_modifica(vacanza.getUtente_modifica());
+            });
+            vacanza.setCollege(collegeRepository.save(vacanza.getCollege()));
+        }
 
         vacanza.setUtente_inserimento(vacanza.getUtente_inserimento());
         vacanza.setUtente_modifica(vacanza.getUtente_inserimento());

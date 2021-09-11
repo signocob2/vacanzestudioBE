@@ -18,11 +18,11 @@ public class College extends BaseEntity {
 
     private String nome;
 
-    private String indirizzo;
+    private String indirizzo = "Indirizzo default";
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
     private List<AttivitaCollege> attivitaCollegeList;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "college")
     private List<Vacanza> vacanzaList;
 }
