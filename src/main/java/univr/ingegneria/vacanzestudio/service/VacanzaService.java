@@ -32,6 +32,10 @@ public class VacanzaService {
                 .orElseThrow(() -> new VacanzaException("Vacanza con id" + id + " non trovata"));
     }
 
+    public Vacanza addVacanza(Vacanza vacanza) {
+        return prepareAndSaveVacanza(vacanza);
+    }
+
     public PrenotazioneVacanzaCollege addVacanzaCollege(PrenotazioneVacanzaCollege prenotazioneVacanzaCollege) {
         return prenotazioneVacanzaCollegeRepository.save(prenotazioneVacanzaCollege);
     }
@@ -46,5 +50,23 @@ public class VacanzaService {
 
     public List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByIdUtente(Long id) {
         return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByUtenteId(id);
+    }
+
+
+    private Vacanza prepareAndSaveVacanza(Vacanza vacanza) {
+        vacanza.getFamiglia().setId(0L);
+        vacanza.getCollege().setId(0L);
+
+        vacanza.setUtente_inserimento(vacanza.getUtente_inserimento());
+        vacanza.setUtente_modifica(vacanza.getUtente_inserimento());
+
+        // Gite
+        vacanza.getGitaList().forEach(gita -> {
+            gita.setVacanza(vacanza);
+            gita.setUtente_inserimento(vacanza.getUtente_inserimento());
+            gita.setUtente_modifica(vacanza.getUtente_modifica());
+        });
+
+        return vacanzaRepository.save(vacanza);
     }
 }

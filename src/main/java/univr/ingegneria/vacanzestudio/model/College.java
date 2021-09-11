@@ -1,6 +1,5 @@
 package univr.ingegneria.vacanzestudio.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +24,5 @@ public class College extends BaseEntity {
     private List<AttivitaCollege> attivitaCollegeList;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "college")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Vacanza> vacanzaList;
 }

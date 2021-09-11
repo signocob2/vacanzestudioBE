@@ -4,10 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import univr.ingegneria.vacanzestudio.dto.DettaglioVacanzaDto;
-import univr.ingegneria.vacanzestudio.dto.PrenotazioneVacanzaCollegeDto;
-import univr.ingegneria.vacanzestudio.dto.PrenotazioneVacanzaFamigliaDto;
-import univr.ingegneria.vacanzestudio.dto.RicercaVacanzaDto;
+import univr.ingegneria.vacanzestudio.dto.*;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
@@ -58,6 +55,15 @@ class VacanzaController {
         return CollectionUtils.collate(idVacanzaCollegeList, idVacanzaFamigliaList);
     }
 
+    @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public VacanzaDto addVacanza(@RequestBody VacanzaDto vacanzaDto) {
+        Vacanza vacanza = convertToVacanzaEntity(vacanzaDto);
+        Vacanza newVacanza = vacanzaService.addVacanza(vacanza);
+        return convertToVacanzaDto(newVacanza);
+    }
+
     @PostMapping("/prenotazione/addVacanzaCollege")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -77,17 +83,21 @@ class VacanzaController {
     }
 
     // Converter to dto
+    private VacanzaDto convertToVacanzaDto(Vacanza vacanza) {
+        return modelMapper.map(vacanza, VacanzaDto.class);
+    }
+
     private DettaglioVacanzaDto convertToDettaglioVacanzaDto(Vacanza vacanza) {
         return modelMapper.map(vacanza, DettaglioVacanzaDto.class);
     }
 
-    private RicercaVacanzaDto convertToVacanzaDto(Vacanza vacanza) {
+    private RicercaVacanzaDto convertToRicercaVacanzaDto(Vacanza vacanza) {
         return modelMapper.map(vacanza, RicercaVacanzaDto.class);
     }
 
     private List<RicercaVacanzaDto> convertToRicercaVacanzaDtoList(List<Vacanza> vacanzaList) {
         return vacanzaList.stream()
-                .map(this::convertToVacanzaDto)
+                .map(this::convertToRicercaVacanzaDto)
                 .collect(Collectors.toList());
     }
 
@@ -100,6 +110,10 @@ class VacanzaController {
     }
 
     // Converter to entity
+    private Vacanza convertToVacanzaEntity(VacanzaDto vacanzaDto) {
+        return modelMapper.map(vacanzaDto, Vacanza.class);
+    }
+
     private PrenotazioneVacanzaCollege convertToPrenotazioneVacanzaCollegeEntity(PrenotazioneVacanzaCollegeDto prenotazioneVacanzaCollegeDto) {
         return modelMapper.map(prenotazioneVacanzaCollegeDto, PrenotazioneVacanzaCollege.class);
     }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class DettaglioVacanzaDto {
+public class VacanzaDto {
     private Long id;
 
     private String cittaDiPermanenza;
@@ -22,6 +22,10 @@ public class DettaglioVacanzaDto {
     private String linguaStranieraStudiata;
 
     private List<GitaDto> gitaList;
+
+    private PrenotazioneVacanzaCollegeDto prenotazioneVacanzaCollege;
+
+    private PrenotazioneVacanzaFamigliaDto prenotazioneVacanzaFamiglia;
 
     private CollegeDto college;
 

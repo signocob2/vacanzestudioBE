@@ -28,19 +28,17 @@ public class Vacanza extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vacanza")
     private List<Gita> gitaList;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_vacanza")
-    private PrenotazioneVacanzaCollege prenotazioneVacanzaCollege;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vacanza")
+    private List<PrenotazioneVacanzaCollege> prenotazioneVacanzaCollegeList;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_vacanza")
-    private PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vacanza")
+    private List<PrenotazioneVacanzaFamiglia> prenotazioneVacanzaFamigliaList;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_college")
     private College college;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_famiglia")
     private Famiglia famiglia;
 }
