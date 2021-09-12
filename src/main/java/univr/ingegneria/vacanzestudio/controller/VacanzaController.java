@@ -11,12 +11,16 @@ import univr.ingegneria.vacanzestudio.model.Vacanza;
 import univr.ingegneria.vacanzestudio.service.VacanzaService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/vacanza")
 class VacanzaController {
+    private static final String DEFAULT_DATI_AGGIUNTIVI = "Non è ancora confermato nessun amico con cui alloggerai";
+
     @Resource
     VacanzaService vacanzaService;
 
@@ -53,6 +57,40 @@ class VacanzaController {
                 .collect(Collectors.toList());
 
         return CollectionUtils.collate(idVacanzaCollegeList, idVacanzaFamigliaList);
+    }
+
+    @GetMapping("/listaConferme/{idUtente}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<ConfermaVacanzaDto> getListaConfermaVacanza(@PathVariable("idUtente") Long idUtente) {
+        List<PrenotazioneVacanzaCollege> prenotazioneVacanzaCollegeList = vacanzaService.findPrenotazioneVacanzaCollegeByIdUtente(idUtente);
+        List<PrenotazioneVacanzaFamiglia> prenotazioneVacanzaFamigliaList = vacanzaService.findPrenotazioneVacanzaFamigliaByIdUtente(idUtente);
+
+        List<ConfermaVacanzaDto> confermeCollege = prenotazioneVacanzaCollegeList.stream()
+                .map(p -> {
+                    Vacanza v = p.getVacanza();
+                    return new ConfermaVacanzaDto(v.getId(), v.getCittaDiPermanenza(), v.getDataDiPartenza(), v.getNumeroDiSettimaneDurata(), v.getLinguaStranieraStudiata(), p.getSingolaCondivisa(), null, null, p.getPagamentoCartaBonifico(), "");
+                })
+                .collect(Collectors.toList());
+
+
+        List<ConfermaVacanzaDto> confermeFamiglia = prenotazioneVacanzaFamigliaList.stream()
+                .map(p -> {
+                    Vacanza v = p.getVacanza();
+                    return new ConfermaVacanzaDto(v.getId(), v.getCittaDiPermanenza(), v.getDataDiPartenza(), v.getNumeroDiSettimaneDurata(), v.getLinguaStranieraStudiata(), null, p.getNomeAmico(), p.getEmailAmico(), p.getPagamentoCartaBonifico(), DEFAULT_DATI_AGGIUNTIVI);
+                })
+                .collect(Collectors.toList());
+
+        confermeFamiglia.forEach(cf -> {
+            if (Objects.nonNull(vacanzaService.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(cf.getId(), cf.getEmailAmico()))) {
+                cf.setDettagliAggiuntivi("Confermiamo che nella stessa famiglia soggiornerà anche l'amico " + cf.getNomeAmico() + " - " + cf.getEmailAmico());
+            }
+        });
+
+        List<ConfermaVacanzaDto> confermeTotali = new ArrayList<>(confermeCollege);
+        confermeTotali.addAll(confermeFamiglia);
+
+        return confermeTotali;
     }
 
     @PostMapping("/add")

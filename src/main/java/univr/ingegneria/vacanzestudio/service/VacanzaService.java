@@ -37,6 +37,10 @@ public class VacanzaService {
                 .orElseThrow(() -> new VacanzaException("Vacanza con id" + id + " non trovata"));
     }
 
+    public PrenotazioneVacanzaFamiglia findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(Long id, String emailAmico) {
+        return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(id, emailAmico).orElse(null);
+    }
+
     public Vacanza addVacanza(Vacanza vacanza) {
         return prepareAndSaveVacanza(vacanza);
     }
