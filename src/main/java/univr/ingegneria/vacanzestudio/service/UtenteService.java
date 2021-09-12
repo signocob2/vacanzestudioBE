@@ -7,11 +7,16 @@ import univr.ingegneria.vacanzestudio.model.Utente;
 import univr.ingegneria.vacanzestudio.repository.UtenteRepository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UtenteService {
     @Resource
     UtenteRepository utenteRepository;
+
+    public List<Utente> findAllUtente() {
+        return utenteRepository.findAll();
+    }
 
     public Utente findUtenteById(Long idUtente) {
         return utenteRepository.findUtenteById(idUtente)
