@@ -19,6 +19,8 @@ public class PrenotazioneVacanzaFamiglia extends BaseEntity {
 
     private String emailAmico;
 
+    private String pagamentoCartaBonifico;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
     private Vacanza vacanza;

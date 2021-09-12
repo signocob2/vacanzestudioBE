@@ -13,4 +13,6 @@ public class PrenotazioneVacanzaCollegeDto {
     private Long idUtente;
 
     private String singolaCondivisa;
+
+    private String pagamentoCartaBonifico;
 }

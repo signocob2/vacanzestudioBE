@@ -17,6 +17,8 @@ public class PrenotazioneVacanzaCollege extends BaseEntity {
 
     private String singolaCondivisa;
 
+    private String pagamentoCartaBonifico;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vacanza")
     private Vacanza vacanza;

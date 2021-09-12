@@ -15,4 +15,6 @@ public class PrenotazioneVacanzaFamigliaDto {
     private String nomeAmico;
 
     private String emailAmico;
+    
+    private String pagamentoCartaBonifico;
 }
