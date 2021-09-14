@@ -23,14 +23,17 @@ class QuestionarioController {
     @ResponseBody
     public QuestionarioDto getQuestionarioByIdUtenteAndIdVacanza(@PathVariable("idStudente") Long idStudente, @PathVariable("idVacanza") Long idVacanza) {
         Questionario q = questionarioService.findQuestionarioByUtenteIdAndVacanzaId(idStudente, idVacanza);
-        return new QuestionarioDto(q.getEsperienzaPositiva(), q.getAlloggioCurato(), q.getPersonaleDisponibile(), q.getUtilePerLingua(), q.getPrezzoGiteAppropriato(), q.getVotoGradimento(), q.getCommentoLibero(), q.getIsCompilato());
+        return new QuestionarioDto(idStudente, idVacanza, q.getEsperienzaPositiva(), q.getAlloggioCurato(), q.getPersonaleDisponibile(), q.getUtilePerLingua(), q.getPrezzoGiteAppropriato(), q.getVotoGradimento(), q.getCommentoLibero(), q.getIsCompilato());
     }
 
-    @PostMapping("/compilaQuestionario")
+    @PostMapping("/compila")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public QuestionarioDto compilaQuestionario(@RequestBody QuestionarioDto questionarioDto) {
         Questionario questionario = convertToQuestionarioEntity(questionarioDto);
+        questionario.getVacanza().setId(questionarioDto.getIdVacanza());
+        questionario.getUtente().setId(questionarioDto.getIdUtente());
+
         questionario = questionarioService.compilaQuestionario(questionario);
         return convertToQuestionarioDto(questionario);
     }

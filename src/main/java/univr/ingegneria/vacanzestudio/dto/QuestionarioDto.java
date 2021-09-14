@@ -9,6 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class QuestionarioDto {
+    private Long idUtente;
+
+    private Long idVacanza;
+
     private String esperienzaPositiva;
 
     private String alloggioCurato;
