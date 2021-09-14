@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ConfermaVacanzaDto {
+public class VacanzaPrenotataDto {
     private Long id;
 
     private String cittaDiPermanenza;
@@ -31,4 +31,8 @@ public class ConfermaVacanzaDto {
     private String pagamentoCartaBonifico;
 
     private String dettagliAggiuntivi;
+
+    private Boolean isVacanzaTerminata;
+
+    private Boolean isQuestionarioCompilato;
 }

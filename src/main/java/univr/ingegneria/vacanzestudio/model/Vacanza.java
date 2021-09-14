@@ -41,4 +41,10 @@ public class Vacanza extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_famiglia")
     private Famiglia famiglia;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vacanza")
+    private List<Certificato> certificatoList;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vacanza")
+    private List<Questionario> questionarioList;
 }
