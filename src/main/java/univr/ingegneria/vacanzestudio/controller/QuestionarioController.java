@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ class QuestionarioController {
     @ResponseBody
     public QuestionarioDto getQuestionarioByIdUtenteAndIdVacanza(@PathVariable("idStudente") Long idStudente, @PathVariable("idVacanza") Long idVacanza) {
         Questionario q = questionarioService.findQuestionarioByUtenteIdAndVacanzaId(idStudente, idVacanza);
-        return new QuestionarioDto(idStudente, idVacanza, q.getEsperienzaPositiva(), q.getAlloggioCurato(), q.getPersonaleDisponibile(), q.getUtilePerLingua(), q.getPrezzoGiteAppropriato(), q.getVotoGradimento(), q.getCommentoLibero(), q.getIsCompilato());
+        return new QuestionarioDto(q.getId(), idStudente, idVacanza, q.getEsperienzaPositiva(), q.getAlloggioCurato(), q.getPersonaleDisponibile(), q.getUtilePerLingua(), q.getPrezzoGiteAppropriato(), q.getVotoGradimento(), q.getCommentoLibero(), q.getIsCompilato());
     }
 
     @PostMapping("/compila")
@@ -31,6 +32,11 @@ class QuestionarioController {
     @ResponseBody
     public QuestionarioDto compilaQuestionario(@RequestBody QuestionarioDto questionarioDto) {
         Questionario questionario = convertToQuestionarioEntity(questionarioDto);
+        questionario.setIsCompilato("S");
+        if (StringUtils.isBlank(questionario.getCommentoLibero())) {
+            questionario.setCommentoLibero(StringUtils.SPACE);
+        }
+
         questionario.getVacanza().setId(questionarioDto.getIdVacanza());
         questionario.getUtente().setId(questionarioDto.getIdUtente());
 
