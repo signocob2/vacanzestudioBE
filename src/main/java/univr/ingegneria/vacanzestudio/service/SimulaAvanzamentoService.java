@@ -1,17 +1,17 @@
 package univr.ingegneria.vacanzestudio.service;
 
 import org.springframework.stereotype.Service;
+import univr.ingegneria.vacanzestudio.dao.CertificatoDao;
 import univr.ingegneria.vacanzestudio.model.Certificato;
-import univr.ingegneria.vacanzestudio.repository.CertificatoRepository;
 
 import javax.annotation.Resource;
 
 @Service
 public class SimulaAvanzamentoService {
     @Resource
-    private CertificatoRepository certificatoRepository;
+    private CertificatoDao certificatoDao;
 
     public Certificato addCertificato(Certificato certificato) {
-        return certificatoRepository.save(certificato);
+        return certificatoDao.save(certificato);
     }
 }
