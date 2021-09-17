@@ -2,9 +2,9 @@ package univr.ingegneria.vacanzestudio.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import univr.ingegneria.vacanzestudio.dao.UtenteDao;
 import univr.ingegneria.vacanzestudio.exception.UtenteException;
 import univr.ingegneria.vacanzestudio.model.Utente;
-import univr.ingegneria.vacanzestudio.repository.UtenteRepository;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,14 +12,14 @@ import java.util.List;
 @Service
 public class UtenteService {
     @Resource
-    UtenteRepository utenteRepository;
+    UtenteDao utenteDao;
 
     public List<Utente> findAllUtente() {
-        return utenteRepository.findAll();
+        return utenteDao.findAll();
     }
 
     public Utente findUtenteById(Long idUtente) {
-        return utenteRepository.findUtenteById(idUtente)
+        return utenteDao.findUtenteById(idUtente)
                 .orElseThrow(() -> new UtenteException("Modifica non ammessa - Utente con id " + idUtente + " non trovato"));
     }
 
@@ -29,12 +29,12 @@ public class UtenteService {
 
     public Utente updateUtente(Utente newUtente) {
         // Recupero il vecchio utente
-        Utente oldUtente = utenteRepository.findById(newUtente.getId())
+        Utente oldUtente = utenteDao.findById(newUtente.getId())
                 .orElseThrow(() -> new UtenteException("Modifica non effettuata - Utente con id " + newUtente.getId() + " non trovato"));
 
         // Controllo se la mail esiste già
         if (!StringUtils.equals(oldUtente.getEmail(), newUtente.getEmail())) {
-            utenteRepository.findUtenteByEmail(newUtente.getEmail()).ifPresent(s -> {
+            utenteDao.findUtenteByEmail(newUtente.getEmail()).ifPresent(s -> {
                 throw new UtenteException("Modifica non effettuata - Utente con email " + s.getEmail() + " già presente");
             });
         }
@@ -47,7 +47,7 @@ public class UtenteService {
         newUtente.setPrenotazioneVacanzaFamigliaList(oldUtente.getPrenotazioneVacanzaFamigliaList());
         newUtente.getPrenotazioneVacanzaFamigliaList().forEach(p -> p.setUtente(newUtente));
 
-        utenteRepository.delete(oldUtente);
+        utenteDao.delete(oldUtente);
         return prepareAndSaveUtente(newUtente);
     }
 
@@ -76,6 +76,6 @@ public class UtenteService {
             genitore.setUtente_modifica(utente.getUtente_modifica());
         });
 
-        return utenteRepository.save(utente);
+        return utenteDao.save(utente);
     }
 }

@@ -1,4 +1,4 @@
-package univr.ingegneria.vacanzestudio.repository;
+package univr.ingegneria.vacanzestudio.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
@@ -6,7 +6,7 @@ import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import java.util.List;
 import java.util.Optional;
 
-public interface PrenotazioneVacanzaFamigliaRepository extends JpaRepository<PrenotazioneVacanzaFamiglia, Long> {
+public interface PrenotazioneVacanzaFamigliaDao extends JpaRepository<PrenotazioneVacanzaFamiglia, Long> {
 
     List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByUtenteId(Long id);
 

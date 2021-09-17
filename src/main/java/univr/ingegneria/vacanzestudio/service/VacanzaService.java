@@ -1,11 +1,11 @@
 package univr.ingegneria.vacanzestudio.service;
 
 import org.springframework.stereotype.Service;
+import univr.ingegneria.vacanzestudio.dao.*;
 import univr.ingegneria.vacanzestudio.exception.VacanzaException;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
-import univr.ingegneria.vacanzestudio.repository.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,31 +14,31 @@ import java.util.Objects;
 @Service
 public class VacanzaService {
     @Resource
-    private VacanzaRepository vacanzaRepository;
+    private VacanzaDao vacanzaDao;
 
     @Resource
-    private FamigliaRepository famigliaRepository;
+    private FamigliaDao famigliaDao;
 
     @Resource
-    private CollegeRepository collegeRepository;
+    private CollegeDao collegeDao;
 
     @Resource
-    private PrenotazioneVacanzaCollegeRepository prenotazioneVacanzaCollegeRepository;
+    private PrenotazioneVacanzaCollegeDao prenotazioneVacanzaCollegeDao;
 
     @Resource
-    private PrenotazioneVacanzaFamigliaRepository prenotazioneVacanzaFamigliaRepository;
+    private PrenotazioneVacanzaFamigliaDao prenotazioneVacanzaFamigliaDao;
 
     public List<Vacanza> findAllVacanza() {
-        return vacanzaRepository.findAll();
+        return vacanzaDao.findAll();
     }
 
     public Vacanza findVacanzaById(Long id) {
-        return vacanzaRepository.findVacanzaById(id)
+        return vacanzaDao.findVacanzaById(id)
                 .orElseThrow(() -> new VacanzaException("Vacanza con id" + id + " non trovata"));
     }
 
     public PrenotazioneVacanzaFamiglia findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(Long id, String emailAmico) {
-        return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(id, emailAmico).orElse(null);
+        return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(id, emailAmico).orElse(null);
     }
 
     public Vacanza addVacanza(Vacanza vacanza) {
@@ -46,26 +46,26 @@ public class VacanzaService {
     }
 
     public PrenotazioneVacanzaCollege addVacanzaCollege(PrenotazioneVacanzaCollege prenotazioneVacanzaCollege) {
-        return prenotazioneVacanzaCollegeRepository.save(prenotazioneVacanzaCollege);
+        return prenotazioneVacanzaCollegeDao.save(prenotazioneVacanzaCollege);
     }
 
     public PrenotazioneVacanzaFamiglia addVacanzaFamiglia(PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia) {
-        return prenotazioneVacanzaFamigliaRepository.save(prenotazioneVacanzaFamiglia);
+        return prenotazioneVacanzaFamigliaDao.save(prenotazioneVacanzaFamiglia);
     }
 
     public List<PrenotazioneVacanzaCollege> findPrenotazioneVacanzaCollegeByIdUtente(Long id) {
-        return prenotazioneVacanzaCollegeRepository.findPrenotazioneVacanzaCollegeByUtenteId(id);
+        return prenotazioneVacanzaCollegeDao.findPrenotazioneVacanzaCollegeByUtenteId(id);
     }
 
     public List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByIdUtente(Long id) {
-        return prenotazioneVacanzaFamigliaRepository.findPrenotazioneVacanzaFamigliaByUtenteId(id);
+        return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByUtenteId(id);
     }
 
 
     private Vacanza prepareAndSaveVacanza(Vacanza vacanza) {
         if (Objects.isNull(vacanza.getFamiglia().getId())) {
             vacanza.getFamiglia().setId(0L);
-            vacanza.setFamiglia(famigliaRepository.save(vacanza.getFamiglia()));
+            vacanza.setFamiglia(famigliaDao.save(vacanza.getFamiglia()));
         }
 
         if (Objects.isNull(vacanza.getCollege().getId())) {
@@ -75,7 +75,7 @@ public class VacanzaService {
                 attivitaCollege.setUtente_inserimento(vacanza.getUtente_inserimento());
                 attivitaCollege.setUtente_modifica(vacanza.getUtente_modifica());
             });
-            vacanza.setCollege(collegeRepository.save(vacanza.getCollege()));
+            vacanza.setCollege(collegeDao.save(vacanza.getCollege()));
         }
 
         vacanza.setUtente_inserimento(vacanza.getUtente_inserimento());
@@ -88,6 +88,6 @@ public class VacanzaService {
             gita.setUtente_modifica(vacanza.getUtente_modifica());
         });
 
-        return vacanzaRepository.save(vacanza);
+        return vacanzaDao.save(vacanza);
     }
 }
