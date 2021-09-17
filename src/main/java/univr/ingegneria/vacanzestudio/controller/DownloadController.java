@@ -52,7 +52,7 @@ class DownloadController {
         // Inserimento tabella
         PdfPTable table = new PdfPTable(4);
         addTableHeader(table);
-        addRows(table, certificato);
+        addTableRows(table, certificato);
 //        document.add(table);
         table.setTotalWidth(450f);
         table.writeSelectedRows(0, -1, 75, 700, writer.getDirectContent());
@@ -85,7 +85,7 @@ class DownloadController {
                 });
     }
 
-    private void addRows(PdfPTable table, Certificato certificato) {
+    private void addTableRows(PdfPTable table, Certificato certificato) {
         Vacanza vacanza = certificato.getVacanza();
         table.addCell(vacanza.getId().toString());
         table.addCell(vacanza.getCittaDiPermanenza());

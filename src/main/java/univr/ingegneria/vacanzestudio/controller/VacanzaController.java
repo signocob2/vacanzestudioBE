@@ -128,7 +128,7 @@ class VacanzaController {
     @PostMapping("/prenotazione/addVacanzaCollege")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public PrenotazioneVacanzaCollegeDto addVacanzaCollege(@RequestBody PrenotazioneVacanzaCollegeDto prenotazioneVacanzaCollegeDto) {
+    public PrenotazioneVacanzaCollegeDto addPrenotazioneVacanzaCollege(@RequestBody PrenotazioneVacanzaCollegeDto prenotazioneVacanzaCollegeDto) {
         PrenotazioneVacanzaCollege prenotazioneVacanzaCollege = convertToPrenotazioneVacanzaCollegeEntity(prenotazioneVacanzaCollegeDto);
         prenotazioneVacanzaCollege = vacanzaService.addVacanzaCollege(prenotazioneVacanzaCollege);
         return convertToPrenotazioneVacanzaCollegeDto(prenotazioneVacanzaCollege);
@@ -137,7 +137,7 @@ class VacanzaController {
     @PostMapping("/prenotazione/addVacanzaFamiglia")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public PrenotazioneVacanzaFamigliaDto addVacanzaFamiglia(@RequestBody PrenotazioneVacanzaFamigliaDto prenotazioneVacanzaFamigliaDto) {
+    public PrenotazioneVacanzaFamigliaDto addPrenotazioneVacanzaFamiglia(@RequestBody PrenotazioneVacanzaFamigliaDto prenotazioneVacanzaFamigliaDto) {
         PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia = convertToPrenotazioneVacanzaFamigliaEntity(prenotazioneVacanzaFamigliaDto);
         prenotazioneVacanzaFamiglia = vacanzaService.addVacanzaFamiglia(prenotazioneVacanzaFamiglia);
         return convertToPrenotazioneVacanzaFamigliaDto(prenotazioneVacanzaFamiglia);
