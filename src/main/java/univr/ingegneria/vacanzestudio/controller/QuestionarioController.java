@@ -24,7 +24,7 @@ class QuestionarioController {
     @ResponseBody
     public QuestionarioDto getQuestionarioByIdUtenteAndIdVacanza(@PathVariable("idStudente") Long idStudente, @PathVariable("idVacanza") Long idVacanza) {
         Questionario q = questionarioService.findQuestionarioByUtenteIdAndVacanzaId(idStudente, idVacanza);
-        return new QuestionarioDto(q.getId(), idStudente, idVacanza, q.getEsperienzaPositiva(), q.getAlloggioCurato(), q.getPersonaleDisponibile(), q.getUtilePerLingua(), q.getPrezzoGiteAppropriato(), q.getVotoGradimento(), q.getCommentoLibero(), q.getIsCompilato());
+        return new QuestionarioDto(q.getId(), idStudente, q.getUtente().getEmail(), idVacanza, q.getEsperienzaPositiva(), q.getAlloggioCurato(), q.getPersonaleDisponibile(), q.getUtilePerLingua(), q.getPrezzoGiteAppropriato(), q.getVotoGradimento(), q.getCommentoLibero(), q.getIsCompilato());
     }
 
     @PostMapping("/compila")
