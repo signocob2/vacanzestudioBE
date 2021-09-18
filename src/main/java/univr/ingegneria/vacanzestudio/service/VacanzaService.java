@@ -53,6 +53,14 @@ public class VacanzaService {
         return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(id, emailAmico).orElse(null);
     }
 
+    public List<Vacanza> getListaVacanzeNonIniziate(String dataCorrenteSimulataString) {
+        LocalDate dataCorrenteSimulata = LocalDate.parse(dataCorrenteSimulataString, DateTimeFormatter.BASIC_ISO_DATE);
+
+        return vacanzaDao.findAll().stream()
+                .filter(v -> !isVacanzaIniziata(dataCorrenteSimulata, v))
+                .collect(Collectors.toList());
+    }
+
     public List<Long> getListaIdVacanzeGiaPrenotate(Long idUtente) {
         List<Long> idVacanzaCollegeList = this.findPrenotazioneVacanzaCollegeByIdUtente(idUtente)
                 .stream()
@@ -131,6 +139,10 @@ public class VacanzaService {
                     return new VacanzaTerminataDto(v.getId(), v.getCittaDiPermanenza(), v.getDataDiPartenza(), v.getNumeroDiSettimaneDurata(), v.getLinguaStranieraStudiata(), votoMedioQuestionari, questionarioDtoList);
                 })
                 .collect(Collectors.toList());
+    }
+
+    private boolean isVacanzaIniziata(LocalDate dataCorrenteSimulata, Vacanza v) {
+        return v.getDataDiPartenza().isBefore(dataCorrenteSimulata) || v.getDataDiPartenza().isEqual(dataCorrenteSimulata);
     }
 
     private boolean isVacanzaTerminata(LocalDate dataCorrenteSimulata, Vacanza v) {

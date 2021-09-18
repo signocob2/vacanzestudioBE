@@ -22,11 +22,11 @@ class VacanzaController {
     @Resource
     ModelMapper modelMapper;
 
-    @GetMapping("/all")
+    @GetMapping("/listaVacanzeNonTerminate/{dataCorrenteSimulata}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<RicercaVacanzaDto> getAllVacanza() {
-        List<Vacanza> vacanzaList = vacanzaService.findAllVacanza();
+    public List<RicercaVacanzaDto> getListaVacanzeNonIniziate(@PathVariable("dataCorrenteSimulata") String dataCorrenteSimulataString) {
+        List<Vacanza> vacanzaList = vacanzaService.getListaVacanzeNonIniziate(dataCorrenteSimulataString);
         return convertToRicercaVacanzaDtoList(vacanzaList);
     }
 
