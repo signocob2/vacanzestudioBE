@@ -49,8 +49,8 @@ public class VacanzaService {
                 .orElseThrow(() -> new VacanzaException("Vacanza con id" + id + " non trovata"));
     }
 
-    public PrenotazioneVacanzaFamiglia findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(Long id, String emailAmico) {
-        return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(id, emailAmico).orElse(null);
+    public PrenotazioneVacanzaFamiglia findPrenotazioneVacanzaFamigliaByVacanzaIdAndUtenteEmail(Long id, String emailAmico) {
+        return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByVacanzaIdAndUtenteEmail(id, emailAmico).orElse(null);
     }
 
     public List<Vacanza> getListaVacanzeNonIniziate(String dataCorrenteSimulataString) {
@@ -104,9 +104,9 @@ public class VacanzaService {
                 })
                 .collect(Collectors.toList());
 
-        vacanzePrenotateFamiglia.forEach(cf -> {
-            if (Objects.nonNull(this.findPrenotazioneVacanzaFamigliaByVacanzaIdAndEmailAmico(cf.getId(), cf.getEmailAmico()))) {
-                cf.setDettagliAggiuntivi("Confermiamo che nella stessa famiglia soggiornerà anche l'amico " + cf.getNomeAmico() + " - " + cf.getEmailAmico());
+        vacanzePrenotateFamiglia.forEach(vacanzaF -> {
+            if (Objects.nonNull(this.findPrenotazioneVacanzaFamigliaByVacanzaIdAndUtenteEmail(vacanzaF.getId(), vacanzaF.getEmailAmico()))) {
+                vacanzaF.setDettagliAggiuntivi("Confermiamo che nella stessa famiglia soggiornerà anche l'amico " + vacanzaF.getNomeAmico() + " - " + vacanzaF.getEmailAmico());
             }
         });
 
