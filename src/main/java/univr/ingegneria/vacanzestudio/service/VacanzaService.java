@@ -14,6 +14,7 @@ import univr.ingegneria.vacanzestudio.model.Questionario;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -182,6 +183,11 @@ public class VacanzaService {
         return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByUtenteId(id);
     }
 
+    @Transactional
+    public void deleteByUtenteIdAndVacanzaId(Long idUtente, Long idVacanza) {
+        prenotazioneVacanzaFamigliaDao.deleteByUtenteIdAndVacanzaId(idUtente, idVacanza);
+        prenotazioneVacanzaCollegeDao.deleteByUtenteIdAndVacanzaId(idUtente, idVacanza);
+    }
 
     private Vacanza prepareAndSaveVacanza(Vacanza vacanza) {
         if (Objects.isNull(vacanza.getFamiglia().getId())) {

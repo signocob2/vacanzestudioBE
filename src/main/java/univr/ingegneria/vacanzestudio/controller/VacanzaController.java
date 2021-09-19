@@ -2,6 +2,7 @@ package univr.ingegneria.vacanzestudio.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import univr.ingegneria.vacanzestudio.dto.*;
 import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
@@ -83,6 +84,13 @@ class VacanzaController {
         PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia = convertToPrenotazioneVacanzaFamigliaEntity(prenotazioneVacanzaFamigliaDto);
         prenotazioneVacanzaFamiglia = vacanzaService.addVacanzaFamiglia(prenotazioneVacanzaFamiglia);
         return convertToPrenotazioneVacanzaFamigliaDto(prenotazioneVacanzaFamiglia);
+    }
+
+    @DeleteMapping(value = "/prenotazione/delete/{idStudente}/{idVacanza}")
+    public ResponseEntity<Long> deletePrenotazioneVacanza(@PathVariable("idStudente") Long idStudente, @PathVariable("idVacanza") Long idVacanza) {
+        vacanzaService.deleteByUtenteIdAndVacanzaId(idStudente, idVacanza);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // Converter to dto

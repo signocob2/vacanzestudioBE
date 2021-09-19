@@ -8,4 +8,6 @@ import java.util.List;
 public interface PrenotazioneVacanzaCollegeDao extends JpaRepository<PrenotazioneVacanzaCollege, Long> {
 
     List<PrenotazioneVacanzaCollege> findPrenotazioneVacanzaCollegeByUtenteId(Long id);
+
+    void deleteByUtenteIdAndVacanzaId(Long idUtente, Long idVacanza);
 }
