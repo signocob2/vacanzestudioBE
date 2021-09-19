@@ -10,5 +10,7 @@ public interface PrenotazioneVacanzaFamigliaDao extends JpaRepository<Prenotazio
 
     List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByUtenteId(Long id);
 
+    List<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByVacanzaId(Long id);
+
     Optional<PrenotazioneVacanzaFamiglia> findPrenotazioneVacanzaFamigliaByVacanzaIdAndUtenteEmail(Long id, String emailAmico);
 }

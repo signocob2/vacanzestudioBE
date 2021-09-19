@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,9 @@ public class FamigliaDto {
     private String presenzaAnimaliDomestici;
 
     private Integer numeroCamereDisponibili;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Integer numeroCamereRimanenti;
 
     private Integer numeroBagni;
 

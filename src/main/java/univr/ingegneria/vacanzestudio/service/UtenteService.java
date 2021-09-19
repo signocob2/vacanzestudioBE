@@ -41,11 +41,20 @@ public class UtenteService {
 
         newUtente.setId(oldUtente.getId());
 
+        // Non devo perdere le vecchie prenotazioni
         newUtente.setPrenotazioneVacanzaCollegeList(oldUtente.getPrenotazioneVacanzaCollegeList());
         newUtente.getPrenotazioneVacanzaCollegeList().forEach(p -> p.setUtente(newUtente));
 
         newUtente.setPrenotazioneVacanzaFamigliaList(oldUtente.getPrenotazioneVacanzaFamigliaList());
         newUtente.getPrenotazioneVacanzaFamigliaList().forEach(p -> p.setUtente(newUtente));
+
+        // Non devo perdere i vecchi certificati
+        newUtente.setCertificatoList(oldUtente.getCertificatoList());
+        newUtente.getCertificatoList().forEach(c -> c.setUtente(newUtente));
+
+        // Non devo perdere i vecchi questionari
+        newUtente.setQuestionarioList(oldUtente.getQuestionarioList());
+        newUtente.getQuestionarioList().forEach(q -> q.setUtente(newUtente));
 
         utenteDao.delete(oldUtente);
         return prepareAndSaveUtente(newUtente);

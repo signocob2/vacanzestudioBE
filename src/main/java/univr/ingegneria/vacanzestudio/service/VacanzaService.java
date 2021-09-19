@@ -53,6 +53,10 @@ public class VacanzaService {
         return prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByVacanzaIdAndUtenteEmail(id, emailAmico).orElse(null);
     }
 
+    public Integer getNumeroCamereRimanenti(Vacanza vacanza) {
+        return vacanza.getFamiglia().getNumeroCamereDisponibili() - prenotazioneVacanzaFamigliaDao.findPrenotazioneVacanzaFamigliaByVacanzaId(vacanza.getId()).size();
+    }
+
     public List<Vacanza> getListaVacanzeNonIniziate(String dataCorrenteSimulataString) {
         LocalDate dataCorrenteSimulata = LocalDate.parse(dataCorrenteSimulataString, DateTimeFormatter.BASIC_ISO_DATE);
 
@@ -163,6 +167,10 @@ public class VacanzaService {
     }
 
     public PrenotazioneVacanzaFamiglia addVacanzaFamiglia(PrenotazioneVacanzaFamiglia prenotazioneVacanzaFamiglia) {
+        if (StringUtils.isBlank(prenotazioneVacanzaFamiglia.getEmailAmico()) || StringUtils.isBlank(prenotazioneVacanzaFamiglia.getNomeAmico())) {
+            prenotazioneVacanzaFamiglia.setEmailAmico(StringUtils.SPACE);
+            prenotazioneVacanzaFamiglia.setNomeAmico(StringUtils.SPACE);
+        }
         return prenotazioneVacanzaFamigliaDao.save(prenotazioneVacanzaFamiglia);
     }
 

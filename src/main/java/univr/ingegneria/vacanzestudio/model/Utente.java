@@ -57,4 +57,10 @@ public class Utente extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "utente")
     private List<PrenotazioneVacanzaFamiglia> prenotazioneVacanzaFamigliaList;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "utente")
+    private List<Questionario> questionarioList;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "utente")
+    private List<Certificato> certificatoList;
 }

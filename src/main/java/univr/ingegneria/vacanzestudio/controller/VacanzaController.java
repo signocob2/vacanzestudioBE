@@ -91,7 +91,10 @@ class VacanzaController {
     }
 
     private DettaglioVacanzaDto convertToDettaglioVacanzaDto(Vacanza vacanza) {
-        return modelMapper.map(vacanza, DettaglioVacanzaDto.class);
+        DettaglioVacanzaDto dettaglioVacanzaDto = modelMapper.map(vacanza, DettaglioVacanzaDto.class);
+        dettaglioVacanzaDto.getFamiglia().setNumeroCamereRimanenti(vacanzaService.getNumeroCamereRimanenti(vacanza));
+
+        return dettaglioVacanzaDto;
     }
 
     private RicercaVacanzaDto convertToRicercaVacanzaDto(Vacanza vacanza) {
