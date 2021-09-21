@@ -67,11 +67,6 @@ CREATE TABLE HOBBY
     PRIMARY KEY (id_hobby)
 );
 
-CREATE UNIQUE INDEX
-    HOBBY_UNQ_IDX1
-    ON
-        HOBBY (id_utente, nome);
-
 ---------------------------------------------------------------------
 --ALLERGIA
 CREATE TABLE ALLERGIA
@@ -86,11 +81,6 @@ CREATE TABLE ALLERGIA
     utente_modifica                    VARCHAR2(50),
     PRIMARY KEY (id_allergia)
 );
-
-CREATE UNIQUE INDEX
-    ALLERGIA_UNQ_IDX1
-    ON
-        ALLERGIA (id_utente, nome_allergene);
 
 ---------------------------------------------------------------------
 --VACANZA
@@ -127,11 +117,6 @@ CREATE TABLE GITA
     PRIMARY KEY (id_gita)
 );
 
-CREATE UNIQUE INDEX
-    GITA_UNQ_IDX1
-    ON
-        GITA (id_vacanza, destinazione);
-
 ---------------------------------------------------------------------
 --PRENOTAZIONE_VACANZA_COLLEGE
 CREATE TABLE PRENOTAZIONE_VACANZA_COLLEGE
@@ -164,11 +149,6 @@ CREATE TABLE COLLEGE
     PRIMARY KEY (id_college)
 );
 
-CREATE UNIQUE INDEX
-    COLLEGE_UNQ_IDX1
-    ON
-        COLLEGE (indirizzo);
-
 ---------------------------------------------------------------------
 --ATTIVITA_COLLEGE
 CREATE TABLE ATTIVITA_COLLEGE
@@ -183,11 +163,6 @@ CREATE TABLE ATTIVITA_COLLEGE
     utente_modifica       VARCHAR2(50),
     PRIMARY KEY (id_attivita_college)
 );
-
-CREATE UNIQUE INDEX
-    ATTIVITA_COLLEGE_UNQ_IDX1
-    ON
-        ATTIVITA_COLLEGE (id_college, nome_attivita);
 
 ---------------------------------------------------------------------
 --PRENOTAZIONE_VACANZA_FAMIGLIA
@@ -206,11 +181,6 @@ CREATE TABLE PRENOTAZIONE_VACANZA_FAMIGLIA
     utente_modifica                  VARCHAR2(50),
     PRIMARY KEY (id_prenotazione_vacanza_famiglia)
 );
-
-CREATE UNIQUE INDEX
-    PRENOTAZIONE_VACANZA_FAMIGLIA_UNQ_IDX1
-    ON
-        PRENOTAZIONE_VACANZA_FAMIGLIA (id_vacanza, email_amico);
 
 ---------------------------------------------------------------------
 --FAMIGLIA

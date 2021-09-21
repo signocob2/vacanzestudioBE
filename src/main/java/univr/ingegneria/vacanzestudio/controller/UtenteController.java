@@ -35,21 +35,27 @@ class UtenteController {
     }
 
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public UtenteDto addUtente(@RequestBody UtenteDto utenteDto) {
+    public ResponseEntity<?> addUtente(@RequestBody UtenteDto utenteDto) {
         Utente utente = convertToEntity(utenteDto);
-        Utente newUtente = utenteService.addUtente(utente);
-        return convertToUtenteDto(newUtente);
+        try {
+            Utente newUtente = utenteService.addUtente(utente);
+            return ResponseEntity.status(HttpStatus.CREATED).body(convertToUtenteDto(newUtente));
+        } catch (UtenteException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @PutMapping("/update")
-    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public UtenteDto updateUtente(@RequestBody UtenteDto utenteDto) {
+    public ResponseEntity<?> updateUtente(@RequestBody UtenteDto utenteDto) {
         Utente utente = convertToEntity(utenteDto);
-        Utente newUtente = utenteService.updateUtente(utente);
-        return convertToUtenteDto(newUtente);
+        try {
+            Utente newUtente = utenteService.updateUtente(utente);
+            return ResponseEntity.status(HttpStatus.CREATED).body(convertToUtenteDto(newUtente));
+        } catch (UtenteException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     private UtenteDto convertToUtenteDto(Utente utente) {
