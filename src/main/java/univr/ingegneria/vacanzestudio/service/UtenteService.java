@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.service;
 
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import univr.ingegneria.vacanzestudio.dao.GenitoreDao;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Setter
 public class UtenteService {
     @Resource
     UtenteDao utenteDao;
