@@ -1,5 +1,6 @@
 package univr.ingegneria.vacanzestudio.service;
 
+import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Setter
 public class VacanzaService {
     private static final String DEFAULT_DATI_AGGIUNTIVI = "Non è ancora confermato nessun amico con cui alloggerai";
 
