@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import univr.ingegneria.vacanzestudio.dao.GenitoreDao;
 import univr.ingegneria.vacanzestudio.dao.UtenteDao;
+import univr.ingegneria.vacanzestudio.exception.GenitoreException;
 import univr.ingegneria.vacanzestudio.exception.UtenteException;
 import univr.ingegneria.vacanzestudio.model.Genitore;
 import univr.ingegneria.vacanzestudio.model.Utente;
@@ -96,7 +97,7 @@ public class UtenteService {
 
     private void checkEmailLibera(Genitore genitore) {
         genitoreDao.findGenitoreByEmail(genitore.getEmail()).ifPresent(s -> {
-            throw new UtenteException("Errore - Genitore con email " + s.getEmail() + " già presente");
+            throw new GenitoreException("Errore - Genitore con email " + s.getEmail() + " già presente");
         });
     }
 
