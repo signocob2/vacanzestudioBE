@@ -59,7 +59,7 @@ INSERT INTO FAMIGLIA
 (nome_capo_famiglia, cognome_capo_famiglia, recapito_telefonico_capo_famiglia, numero_componenti,
  presenza_animali_domestici, numero_camere_disponibili, numero_bagni, distanza_centro_citta_km, utente_inserimento,
  utente_modifica)
-VALUES ('Renato', 'Signorini', '3491231212', 3, 'S', 2, 1, 3.1, 'automatico2', 'automatico2')
+VALUES ('Renato', 'Signorini', '3491231212', 3, 'S', 6, 1, 3.1, 'automatico2', 'automatico2')
 ;
 
 INSERT INTO COLLEGE

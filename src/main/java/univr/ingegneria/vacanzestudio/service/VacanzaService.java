@@ -113,7 +113,7 @@ public class VacanzaService {
 
         vacanzePrenotateFamiglia.forEach(vacanzaF -> {
             if (Objects.nonNull(this.findPrenotazioneVacanzaFamigliaByVacanzaIdAndUtenteEmail(vacanzaF.getId(), vacanzaF.getEmailAmico()))) {
-                vacanzaF.setDettagliAggiuntivi("Confermiamo che nella stessa famiglia soggiornerà anche l'amico " + vacanzaF.getNomeAmico() + " - " + vacanzaF.getEmailAmico());
+                vacanzaF.setDettagliAggiuntivi("Confermiamo che nella stessa famiglia soggiornerà anche l'amico " + vacanzaF.getNomeAmico());
             }
         });
 
