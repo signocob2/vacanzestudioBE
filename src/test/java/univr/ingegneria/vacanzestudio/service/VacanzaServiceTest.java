@@ -1,6 +1,5 @@
 package univr.ingegneria.vacanzestudio.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -8,15 +7,19 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import univr.ingegneria.vacanzestudio.dao.PrenotazioneVacanzaCollegeDao;
 import univr.ingegneria.vacanzestudio.dao.PrenotazioneVacanzaFamigliaDao;
 import univr.ingegneria.vacanzestudio.dao.VacanzaDao;
+import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaCollege;
+import univr.ingegneria.vacanzestudio.model.PrenotazioneVacanzaFamiglia;
 import univr.ingegneria.vacanzestudio.model.Vacanza;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,15 +43,10 @@ class VacanzaServiceTest {
     VacanzaDao vacanzaDaoMock;
 
     @Mock
-    PrenotazioneVacanzaCollegeDao prenotazioneVacanzaCollegeDao;
+    PrenotazioneVacanzaCollegeDao prenotazioneVacanzaCollegeDaoMock;
 
     @Mock
-    PrenotazioneVacanzaFamigliaDao prenotazioneVacanzaFamigliaDao;
-
-    @BeforeEach
-    private void mockListaVacanzePresentiInDb() {
-        when(vacanzaDaoMock.findAll()).thenReturn(getListaVacanzeTotali());
-    }
+    PrenotazioneVacanzaFamigliaDao prenotazioneVacanzaFamigliaDaoMock;
 
     @Test
     void getListaVacanzeNonIniziate_NessunaGiaIniziata() {
@@ -109,18 +107,72 @@ class VacanzaServiceTest {
 
     @Test
     void getListaIdVacanzeGiaPrenotate_NessunaPrenotazioneTrovata() {
+        // Prepara i mock per il test
+        mockPrenotazioneVacanzaCollegeVuote();
+        mockPrenotazioneVacanzaFamigliaVuote();
+
+        VacanzaService vacanzaService = creaVacanzaService();
+
+        // Chiama il metodo da testare
+        List<Long> idVacanzePrenotate = vacanzaService.getListaIdVacanzeGiaPrenotate(0L);
+
+        // Verifica l'esito del test
+        assertTrue(idVacanzePrenotate.isEmpty());
     }
 
     @Test
     void getListaIdVacanzeGiaPrenotate_PrenotazioniCollegeTrovate() {
+        // Prepara i mock per il test
+        mockPrenotazioneVacanzaCollegeIdTrovati(1L, 2L, 3L);
+        mockPrenotazioneVacanzaFamigliaIdTrovati();
+
+        VacanzaService vacanzaService = creaVacanzaService();
+
+        // Chiama il metodo da testare
+        List<Long> idVacanzePrenotate = vacanzaService.getListaIdVacanzeGiaPrenotate(0L);
+
+        // Verifica l'esito del test
+        assertEquals(3, idVacanzePrenotate.size());
+        assertEquals(1L, idVacanzePrenotate.get(0));
+        assertEquals(2L, idVacanzePrenotate.get(1));
+        assertEquals(3L, idVacanzePrenotate.get(2));
     }
 
     @Test
     void getListaIdVacanzeGiaPrenotate_PrenotazioniFamigliaTrovate() {
+        // Prepara i mock per il test
+        mockPrenotazioneVacanzaCollegeIdTrovati();
+        mockPrenotazioneVacanzaFamigliaIdTrovati(7L, 8L);
+
+        VacanzaService vacanzaService = creaVacanzaService();
+
+        // Chiama il metodo da testare
+        List<Long> idVacanzePrenotate = vacanzaService.getListaIdVacanzeGiaPrenotate(0L);
+
+        // Verifica l'esito del test
+        assertEquals(2, idVacanzePrenotate.size());
+        assertEquals(7L, idVacanzePrenotate.get(0));
+        assertEquals(8L, idVacanzePrenotate.get(1));
     }
 
     @Test
     void getListaIdVacanzeGiaPrenotate_PrenotazioniCollegeEFamigliaTrovate() {
+        // Prepara i mock per il test
+        mockPrenotazioneVacanzaCollegeIdTrovati(1L, 2L, 3L);
+        mockPrenotazioneVacanzaFamigliaIdTrovati(7L, 8L);
+
+        VacanzaService vacanzaService = creaVacanzaService();
+
+        // Chiama il metodo da testare
+        List<Long> idVacanzePrenotate = vacanzaService.getListaIdVacanzeGiaPrenotate(0L);
+
+        // Verifica l'esito del test
+        assertEquals(5, idVacanzePrenotate.size());
+        assertEquals(1L, idVacanzePrenotate.get(0));
+        assertEquals(2L, idVacanzePrenotate.get(1));
+        assertEquals(3L, idVacanzePrenotate.get(2));
+        assertEquals(7L, idVacanzePrenotate.get(3));
+        assertEquals(8L, idVacanzePrenotate.get(4));
     }
 
     private List<Vacanza> getListaVacanzeTotali() {
@@ -143,13 +195,51 @@ class VacanzaServiceTest {
         return vacanzaList;
     }
 
-    private void mockPrenotazioneCollegeVuote(Long id) {
-        when(prenotazioneVacanzaCollegeDao.findPrenotazioneVacanzaCollegeByUtenteId(id)).thenReturn(Collections.emptyList());
+    private void mockListaVacanzePresentiInDb() {
+        when(vacanzaDaoMock.findAll()).thenReturn(getListaVacanzeTotali());
+    }
+
+    private void mockPrenotazioneVacanzaCollegeVuote() {
+        mockPrenotazioneVacanzaCollegeIdTrovati();
+    }
+
+    private void mockPrenotazioneVacanzaFamigliaVuote() {
+        mockPrenotazioneVacanzaFamigliaIdTrovati();
+    }
+
+    private void mockPrenotazioneVacanzaCollegeIdTrovati(Long... idVacanzaList) {
+        List<PrenotazioneVacanzaCollege> prenotazioneVacanzaCollegeList = Arrays.stream(idVacanzaList)
+                .map(idVacanza -> {
+                    PrenotazioneVacanzaCollege p = new PrenotazioneVacanzaCollege();
+                    Vacanza v = new Vacanza();
+                    v.setId(idVacanza);
+                    p.setVacanza(v);
+                    return p;
+                })
+                .collect(Collectors.toList());
+
+        when(prenotazioneVacanzaCollegeDaoMock.findPrenotazioneVacanzaCollegeByUtenteId(anyLong())).thenReturn(prenotazioneVacanzaCollegeList);
+    }
+
+    private void mockPrenotazioneVacanzaFamigliaIdTrovati(Long... idVacanzaList) {
+        List<PrenotazioneVacanzaFamiglia> prenotazioneVacanzaFamigliaList = Arrays.stream(idVacanzaList)
+                .map(idVacanza -> {
+                    PrenotazioneVacanzaFamiglia p = new PrenotazioneVacanzaFamiglia();
+                    Vacanza v = new Vacanza();
+                    v.setId(idVacanza);
+                    p.setVacanza(v);
+                    return p;
+                })
+                .collect(Collectors.toList());
+
+        when(prenotazioneVacanzaFamigliaDaoMock.findPrenotazioneVacanzaFamigliaByUtenteId(anyLong())).thenReturn(prenotazioneVacanzaFamigliaList);
     }
 
     private VacanzaService creaVacanzaService() {
         VacanzaService vacanzaService = new VacanzaService();
         vacanzaService.setVacanzaDao(vacanzaDaoMock);
+        vacanzaService.setPrenotazioneVacanzaCollegeDao(prenotazioneVacanzaCollegeDaoMock);
+        vacanzaService.setPrenotazioneVacanzaFamigliaDao(prenotazioneVacanzaFamigliaDaoMock);
         return vacanzaService;
     }
 }
