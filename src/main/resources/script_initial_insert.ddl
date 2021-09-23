@@ -84,7 +84,7 @@ INSERT INTO VACANZA
  utente_inserimento, utente_modifica)
 VALUES ((SELECT ID_COLLEGE FROM COLLEGE WHERE UTENTE_INSERIMENTO = 'automatico2'),
         (SELECT ID_FAMIGLIA FROM FAMIGLIA WHERE UTENTE_INSERIMENTO = 'automatico2'),
-        'Erbè in sport',
+        'Erbè',
         TO_DATE('03/04/2022', 'dd/MM/yyyy'), 4, 'Spagnolo', 'automatico2', 'automatico2')
 ;
 

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import univr.ingegneria.vacanzestudio.dto.UtenteDto;
+import univr.ingegneria.vacanzestudio.exception.GenitoreException;
 import univr.ingegneria.vacanzestudio.exception.UtenteException;
 import univr.ingegneria.vacanzestudio.model.Utente;
 import univr.ingegneria.vacanzestudio.service.UtenteService;
@@ -41,7 +42,7 @@ class UtenteController {
         try {
             Utente newUtente = utenteService.addUtente(utente);
             return ResponseEntity.status(HttpStatus.CREATED).body(convertToUtenteDto(newUtente));
-        } catch (UtenteException e) {
+        } catch (UtenteException | GenitoreException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
@@ -53,7 +54,7 @@ class UtenteController {
         try {
             Utente newUtente = utenteService.updateUtente(utente);
             return ResponseEntity.status(HttpStatus.CREATED).body(convertToUtenteDto(newUtente));
-        } catch (UtenteException e) {
+        } catch (UtenteException | GenitoreException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
