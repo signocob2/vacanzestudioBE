@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -65,6 +66,7 @@ public class VacanzaService {
 
         return vacanzaDao.findAll().stream()
                 .filter(v -> !isVacanzaIniziata(dataCorrenteSimulata, v))
+                .sorted(Comparator.comparing(Vacanza::getDataDiPartenza))
                 .collect(Collectors.toList());
     }
 
