@@ -85,7 +85,7 @@ INSERT INTO VACANZA
 VALUES ((SELECT ID_COLLEGE FROM COLLEGE WHERE UTENTE_INSERIMENTO = 'automatico2'),
         (SELECT ID_FAMIGLIA FROM FAMIGLIA WHERE UTENTE_INSERIMENTO = 'automatico2'),
         'Erbè',
-        TO_DATE('03/04/2022', 'dd/MM/yyyy'), 4, 'Spagnolo', 'automatico2', 'automatico2')
+        TO_DATE('20/04/2022', 'dd/MM/yyyy'), 4, 'Spagnolo', 'automatico2', 'automatico2')
 ;
 
 INSERT INTO GITA
